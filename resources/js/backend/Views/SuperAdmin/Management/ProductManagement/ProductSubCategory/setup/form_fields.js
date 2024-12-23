@@ -2,8 +2,9 @@ export default [
 	{
 		name: "product_category_id",
 		label: "Enter your product category id",
-		type: "number",
+		type: "select",
 		value: "",
+        data_list: [],
 	},
 
 	{
@@ -13,10 +14,5 @@ export default [
 		value: "",
 	},
 
-	{
-		name: "parent_id",
-		label: "Enter your parent id",
-		type: "number",
-		value: "",
-	},
+
 ];

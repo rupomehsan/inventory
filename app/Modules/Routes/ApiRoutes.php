@@ -20,3 +20,15 @@ include_once base_path("app/Modules/Management/SettingManagement/WebsiteSettings
 
 include_once base_path("app/Modules/Management/ProductManagement/ProductCategory/Routes/Route.php");
 include_once base_path("app/Modules/Management/ProductManagement/ProductSubCategory/Routes/Route.php");
+include_once base_path("app/Modules/Management/ProductManagement/Product/Routes/Route.php");
+include_once base_path("app/Modules/Management/SuppliyerManagement/Suppliyer/Routes/Route.php");
+include_once base_path("app/Modules/Management/PurchaseOrderManagement/PurchaseOrder/Routes/Route.php");
+include_once base_path("app/Modules/Management/WarehouseManagement/WareHouse/Routes/Route.php");
+include_once base_path("app/Modules/Management/WarehouseManagement/WareHouseProductStock/Routes/Route.php");
+include_once base_path("app/Modules/Management/WarehouseManagement/WarehouseProductOut/Routes/Route.php");
+include_once base_path("app/Modules/Management/SalesOrderManagement/SalesOrder/Routes/Route.php");
+include_once base_path("app/Modules/Management/SalesOrderManagement/SalesOrderCollectionHistory/Routes/Route.php");
+include_once base_path("app/Modules/Management/AccountManagement/AccountCategory/Routes/Route.php");
+include_once base_path("app/Modules/Management/AccountManagement/AccountSubCategory/Routes/Route.php");
+include_once base_path("app/Modules/Management/AccountManagement/AccountIncome/Routes/Route.php");
+include_once base_path("app/Modules/Management/AccountManagement/AccountExpense/Routes/Route.php");

@@ -2,6 +2,8 @@
 
 namespace App\Modules\Management\UserManagement\User\Actions;
 
+use Illuminate\Support\Facades\Hash;
+
 class StoreData
 {
     static $model = \App\Modules\Management\UserManagement\User\Models\Model::class;
@@ -14,6 +16,7 @@ class StoreData
                 $image = $request->file('image');
                 $requestData['image'] = uploader($image, 'uploads/users');
             }
+            $requestData['password'] = Hash::make($requestData['password_in_text']);
             if ($data = self::$model::query()->create($requestData)) {
                 return messageResponse('Item added successfully', $data, 201);
             }

@@ -72,9 +72,71 @@
                         title: `Product SubCategory`,
                         icon: `zmdi zmdi-dot-circle-alt`,
                     },
+                    {
+                        route_name: `AllSuppliyer`,
+                        title: `Suppliyer`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllProduct`,
+                        title: `Product`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
                 ]"
             />
 
+
+
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`PurchaseOrder`"
+                :route_name="`AllPurchaseOrder`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`WareHouse`"
+                :route_name="`AllWareHouse`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`WareHouseProductStock`"
+                :route_name="`AllWareHouseProductStock`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`WarehouseProductOut`"
+                :route_name="`AllWarehouseProductOut`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`SalesOrder`"
+                :route_name="`AllSalesOrder`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`SalesOrderCollectionHistory`"
+                :route_name="`AllSalesOrderCollectionHistory`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`AccountCategory`"
+                :route_name="`AllAccountCategory`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`AccountSubCategory`"
+                :route_name="`AllAccountSubCategory`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`AccountIncome`"
+                :route_name="`AllAccountIncome`"
+            />
+            <side-bar-single-menu
+                :icon="`fa fa-plus`"
+                :menu_title="`AccountExpense`"
+                :route_name="`AllAccountExpense`"
+            />
             <!-- Management end -->
         </ul>
     </div>

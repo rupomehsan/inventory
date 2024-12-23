@@ -44,10 +44,18 @@ class DataStoreValidation extends FormRequest
         return [
             'name' => 'required | sometimes',
             'email' => 'required | sometimes',
-            'password' => 'required | sometimes',
+            'password_in_text' => 'required | sometimes',
             'image' => 'required | sometimes',
             'role_id' => 'required | sometimes',
+            'address' => 'required | sometimes',
+            'phone_number' => 'required | sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'password_in_text.required' => 'The password field is required.',
         ];
     }
 }

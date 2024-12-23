@@ -1,6 +1,6 @@
 <template>
-    <div :class="row_col_class">
-        <div class="form-group" v-if="is_visible">
+    <div :class="row_col_class" v-if="is_visible">
+        <div class="form-group" >
             <label for="">
                 {{ label || name }}
             </label>

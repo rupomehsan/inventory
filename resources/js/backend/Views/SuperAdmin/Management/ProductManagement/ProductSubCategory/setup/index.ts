@@ -1,4 +1,3 @@
-
 import app_config from "../../../../../../Config/app_config";
 import setup_type from "./setup_type";
 
@@ -20,8 +19,7 @@ const setup: setup_type = {
     select_fields: [
         "id",
         "product_category_id",
-            "title",
-            "parent_id",
+        "title",
         "status",
         "slug",
         "created_at",
@@ -31,24 +29,21 @@ const setup: setup_type = {
     sort_by_cols: [
         "id",
         "product_category_id",
-            "title",
-            "parent_id",
+        "title",
         "status",
         "created_at",
     ],
     table_header_data: [
         "id",
-        "product_category_id",
-            "title",
-            "parent_id",
+        "product category",
+        "title",
         "status",
         "created_at",
     ],
     table_row_data: [
         "id",
-        "product_category_id",
-            "title",
-            "parent_id",
+        "category",
+        "title",
         "status",
         "created_at",
     ],

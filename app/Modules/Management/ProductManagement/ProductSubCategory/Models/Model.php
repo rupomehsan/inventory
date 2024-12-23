@@ -10,6 +10,7 @@ class Model extends EloquentModel
     use SoftDeletes;
     protected $table = "product_sub_categories";
     protected $guarded = [];
+    protected static $CategoryModel = \App\Modules\Management\ProductManagement\ProductCategory\Models\Model::class;
 
     protected static function booted()
     {
@@ -39,5 +40,10 @@ class Model extends EloquentModel
      public function scopeTrased($q)
     {
         return $q->onlyTrashed();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(self::$CategoryModel, 'product_category_id');
     }
 }

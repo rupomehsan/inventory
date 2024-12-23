@@ -2,6 +2,8 @@
 
 namespace App\Modules\Management\UserManagement\User\Actions;
 
+use Illuminate\Support\Facades\Hash;
+
 class UpdateData
 {
     static $model = \App\Modules\Management\UserManagement\User\Models\Model::class;
@@ -17,6 +19,7 @@ class UpdateData
                 $image = $request->file('image');
                 $requestData['image'] = uploader($image, 'uploads/users');
             }
+            $requestData['password'] = Hash::make($requestData['password_in_text']);
             $data->update($requestData);
             return messageResponse('Item updated successfully', $data, 201);
         } catch (\Exception $e) {

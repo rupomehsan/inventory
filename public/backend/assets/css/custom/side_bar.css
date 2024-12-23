@@ -16,7 +16,7 @@
 #sidebar-wrapper .metismenu {
     gap: 15px;
     overflow-y: auto;
-    max-height: calc(100vh - 63px);
+    max-height: calc(100vh - 250px);
 }
 
 /* width */

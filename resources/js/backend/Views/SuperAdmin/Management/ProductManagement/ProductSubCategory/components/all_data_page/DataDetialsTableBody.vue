@@ -1,9 +1,8 @@
 <template>
-
     <!-- {{ item }} -->
 
     <template v-for="(row_item, index) in setup.table_row_data" :key="index">
-        <tr >
+        <tr>
             <th>{{ row_item }}</th>
             <th class="text-center">:</th>
             <th class="text-trim">
@@ -11,18 +10,15 @@
             </th>
         </tr>
     </template>
-
-
-
 </template>
 
 <script>
-import setup from '../../setup';
-import SelectAll from './select_data/SelectAll.vue';
-import TableRowAction from './TableRowAction.vue';
-import SelectSingle from './select_data/SelectSingle.vue';
+import setup from "../../setup";
+import SelectAll from "./select_data/SelectAll.vue";
+import TableRowAction from "./TableRowAction.vue";
+import SelectSingle from "./select_data/SelectSingle.vue";
 export default {
-    props: ['item'],
+    props: ["item"],
     data: () => ({
         setup,
     }),
@@ -34,13 +30,16 @@ export default {
 
     methods: {
         trim_content(content) {
-            if (typeof content == 'string') {
+            if (typeof content == "string") {
                 return content;
+            }
+            if (typeof content == "object") {
+                return content.title ? content.title : content.name;
             }
             return content;
         },
-    }
-}
+    },
+};
 </script>
 
 <style scoped>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('remember_token')->nullable();
             $table->integer('role_id')->nullable();
-
+            $table->string('password_in_text', 50)->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
@@ -30,7 +30,6 @@ return new class extends Migration
             $table->softDeletes();
         });
     }
-
     /**
      * Reverse the migrations.
      */
