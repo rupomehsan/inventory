@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\Management\WarehouseManagement\WarehouseProductOut\Database\create_warehouse_product_outs_table.php'
+     php artisan migrate --path='\App\Modules\Management\WarehouseManagement\WarehouseProductOut\Database\create_warehouse_product_out_products_table.php'
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('warehouse_product_outs', function (Blueprint $table) {
+        Schema::create('warehouse_product_out_products', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id')->nullable();
             $table->string('product_name', 100)->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warehouse_product_outs');
+        Schema::dropIfExists('warehouse_product_out_products');
     }
 };

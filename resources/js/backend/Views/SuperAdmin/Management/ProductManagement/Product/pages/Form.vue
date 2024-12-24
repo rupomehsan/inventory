@@ -1,35 +1,52 @@
 <template>
     <div>
-
         <form @submit.prevent="submitHandler">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5 class="text-capitalize">
-                        {{ param_id ? `${setup . edit_page_title}` : `${setup . create_page_title}` }}
-
+                        {{
+                            param_id
+                                ? `${setup.edit_page_title}`
+                                : `${setup.create_page_title}`
+                        }}
                     </h5>
                     <div>
-                        <router-link v-if="item.slug" class="btn btn-outline-info mr-2 btn-sm" :to="{
-                            name: `Details${setup . route_prefix}`,
-                            params: { id: item.slug },
-                        }">
+                        <router-link
+                            v-if="item.slug"
+                            class="btn btn-outline-info mr-2 btn-sm"
+                            :to="{
+                                name: `Details${setup.route_prefix}`,
+                                params: { id: item.slug },
+                            }"
+                        >
                             {{ setup.details_page_title }}
                         </router-link>
-                        <router-link class="btn btn-outline-warning btn-sm" :to="{ name: `All${setup . route_prefix}` }">
+                        <router-link
+                            class="btn btn-outline-warning btn-sm"
+                            :to="{ name: `All${setup.route_prefix}` }"
+                        >
                             {{ setup.all_page_title }}
                         </router-link>
                     </div>
                 </div>
                 <div class="card-body card_body_fixed_height">
                     <div class="row">
-                        <template v-for="(form_field, index) in form_fields" v-bind:key="index">
-
-                                <common-input :label="form_field.label" :type="form_field.type" :name="form_field.name"
-                                    :multiple="form_field.multiple" :value="form_field.value"
-                                    :data_list="form_field.data_list"
-                                    :is_visible="form_field.is_visible" :row_col_class="form_field.row_col_class"
-                                    />
-                           
+                        <template
+                            v-for="(form_field, index) in form_fields"
+                            v-bind:key="index"
+                        >
+                            <common-input
+                                :label="form_field.label"
+                                :type="form_field.type"
+                                :name="form_field.name"
+                                :multiple="form_field.multiple"
+                                :value="form_field.value"
+                                :data_list="form_field.data_list"
+                                :is_visible="form_field.is_visible"
+                                :row_col_class="form_field.row_col_class"
+                                :onchange="changeAction"
+                                :onchangeAction="form_field.onchangeAction"
+                            />
                         </template>
                     </div>
                 </div>
@@ -62,6 +79,9 @@ export default {
         if (id) {
             this.set_fields(id);
         }
+
+        this.get_all_suppliyers();
+        this.get_all_categories();
     },
     methods: {
         ...mapActions(store, {
@@ -85,6 +105,21 @@ export default {
                         if (field.name == value[0]) {
                             this.form_fields[index].value = value[1];
                         }
+                        if (
+                            field.name == "description" &&
+                            value[0] == "description"
+                        ) {
+                            $("#description").summernote("code", value[1]);
+                        }
+
+                        if (
+                            field.name == "product_category_id" &&
+                            value[0] == "product_category_id"
+                        ) {
+                            console.log(value[1]);
+
+                            this.get_sub_category(value[1]);
+                        }
                     });
                 });
             }
@@ -93,20 +128,78 @@ export default {
         submitHandler: async function ($event) {
             this.set_only_latest_data(true);
             if (this.param_id) {
+                this.setSummerEditor();
                 let response = await this.update($event);
                 // await this.get_all();
                 if ([200, 201].includes(response.status)) {
                     window.s_alert("data updated");
-                    this.$router.push({ name: `Details${this . setup . route_prefix}` });
+                    this.$router.push({
+                        name: `Details${this.setup.route_prefix}`,
+                    });
                 }
             } else {
+                this.setSummerEditor();
                 let response = await this.create($event);
                 // await this.get_all();
                 if ([200, 201].includes(response.status)) {
                     window.s_alert("data created");
-                    this.$router.push({ name: `All${this . setup . route_prefix}` });
+                    this.$router.push({
+                        name: `All${this.setup.route_prefix}`,
+                    });
                 }
             }
+        },
+        get_all_suppliyers: async function () {
+            let response = await axios.get("suppliyers");
+            if (response.data.status == "success") {
+                const suppliyers = response.data?.data?.data || [];
+                this.form_fields[1].data_list = suppliyers.map((suppliyer) => ({
+                    label: suppliyer.name,
+                    value: suppliyer.id,
+                }));
+            }
+        },
+        get_all_categories: async function () {
+            let response = await axios.get("product-categories");
+            if (response.data.status == "success") {
+                const categories = response.data?.data?.data || [];
+                this.form_fields[2].data_list = categories.map((category) => ({
+                    label: category.title,
+                    value: category.id,
+                }));
+            }
+        },
+        changeAction: function (actionTitle, event, ref) {
+            this[actionTitle](actionTitle, event, ref);
+        },
+        get_product_sub_category_by_category_id: async function (
+            actionTitle,
+            event,
+            ref
+        ) {
+            let category_id = event.target.value;
+            this.get_sub_category(category_id);
+        },
+
+        get_sub_category: async function (category_id) {
+            let response = await axios.get(
+                `get-all-sub-category-by-category-id/${category_id}?get_all=true`
+            );
+            if (response.data.status == "success") {
+                const categories = response.data?.data?.data || [];
+                this.form_fields[3].data_list = categories.map((category) => ({
+                    label: category.title,
+                    value: category.id,
+                }));
+            }
+        },
+
+        setSummerEditor() {
+            var markupStr = $("#description").summernote("code");
+            var target = document.createElement("input");
+            target.setAttribute("name", "description");
+            target.value = markupStr;
+            document.getElementById("description").appendChild(target);
         },
     },
 

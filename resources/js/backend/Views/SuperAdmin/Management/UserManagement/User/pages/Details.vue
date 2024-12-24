@@ -33,6 +33,11 @@
                                         <th>{{ item.email }}</th>
                                     </tr>
                                     <tr>
+                                        <th>phone number</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ item.phone_number  }}</th>
+                                    </tr>
+                                    <tr>
                                         <th>password</th>
                                         <th class="text-center">:</th>
                                         <th>{{ item.password_in_text }}</th>
@@ -47,7 +52,12 @@
                                         <th>image</th>
                                         <th class="text-center">:</th>
                                         <th>
-                                         <img height="100px" width="100px" :src="item.image " alt="">
+                                            <img
+                                                height="100px"
+                                                width="100px"
+                                                :src="item.image"
+                                                alt=""
+                                            />
                                         </th>
                                     </tr>
                                 </tbody>

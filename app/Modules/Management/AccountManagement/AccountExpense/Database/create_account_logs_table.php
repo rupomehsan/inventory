@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\Management\AccountManagement\AccountExpense\Database\create_account_expenses_table.php'
+     php artisan migrate --path='\App\Modules\Management\AccountManagement\AccountExpense\Database\create_account_expenses_logs_table.php'
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('account_expenses', function (Blueprint $table) {
+        Schema::create('account_expense_logs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('account_expense_id')->nullable();
             $table->bigInteger('account_income_id')->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('account_expenses');
+        Schema::dropIfExists('account_expenses_logs');
     }
 };

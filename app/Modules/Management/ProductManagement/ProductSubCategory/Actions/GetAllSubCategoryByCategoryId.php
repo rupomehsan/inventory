@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\Management\UserManagement\User\Actions;
+namespace App\Modules\Management\ProductManagement\ProductSubCategory\Actions;
 
-class GetAllData
+class GetAllSubCategoryByCategoryId
 {
-    static $model = \App\Modules\Management\UserManagement\User\Models\Model::class;
+    static $model = \App\Modules\Management\ProductManagement\ProductSubCategory\Models\Model::class;
 
-    public static function execute()
+    public static function execute($category_id)
     {
         try {
 
@@ -17,23 +17,19 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = ['role:id,name'];
+            $with = ['category:id,title'];
             $condition = [];
 
-            $data = self::$model::query();
+            $data = self::$model::query()->where('product_category_id', $category_id);
 
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-                    $q->where('name', 'like', '%' . $searchKey . '%');
+                    $q->where('product_category_id', 'like', '%' . $searchKey . '%');
 
-                    $q->orWhere('email', 'like', '%' . $searchKey . '%');
+                    $q->orWhere('title', 'like', '%' . $searchKey . '%');
 
-                    $q->orWhere('password', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('image', 'like', '%' . $searchKey . '%');
-
-                    $q->orWhere('role_id', 'like', '%' . $searchKey . '%');
+                    $q->orWhere('parent_id', 'like', '%' . $searchKey . '%');
                 });
             }
 

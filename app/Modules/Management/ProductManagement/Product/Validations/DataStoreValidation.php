@@ -46,7 +46,7 @@ class DataStoreValidation extends FormRequest
             'description' => 'required | sometimes',
             'suppliyer_id' => 'required | sometimes',
             'product_category_id' => 'required | sometimes',
-            'product_sub_category_id' => 'required | sometimes',
+            'product_sub_category_id' => ' sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

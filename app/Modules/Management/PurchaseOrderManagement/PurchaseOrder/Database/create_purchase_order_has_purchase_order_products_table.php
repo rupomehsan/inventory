@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Database\create_purchase_orders_table.php'
+     php artisan migrate --path='\App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Database\create_purchase_order_has_purchase_order_products_table.php'
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('purchase_orders', function (Blueprint $table) {
+        Schema::create('purchase_order_has_purchase_order_products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('purchase_order_id')->nullable();
             $table->bigInteger('purchase_order_products_id')->nullable();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchase_orders');
+        Schema::dropIfExists('purchase_order_has_purchase_order_products');
     }
 };

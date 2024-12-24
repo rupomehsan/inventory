@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Modules\Management\ProductManagement\ProductSubCategory\Controller;
+
 use App\Modules\Management\ProductManagement\ProductSubCategory\Actions\GetAllData;
+use App\Modules\Management\ProductManagement\ProductSubCategory\Actions\GetAllSubCategoryByCategoryId;
 use App\Modules\Management\ProductManagement\ProductSubCategory\Actions\DestroyData;
 use App\Modules\Management\ProductManagement\ProductSubCategory\Actions\GetSingleData;
 use App\Modules\Management\ProductManagement\ProductSubCategory\Actions\StoreData;
@@ -19,9 +21,16 @@ use App\Http\Controllers\Controller as ControllersController;
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
+        return $data;
+    }
+    public function GetAllSubCategoryByCategoryId($category_id)
+    {
+
+        $data = GetAllSubCategoryByCategoryId::execute($category_id);
         return $data;
     }
 
@@ -42,7 +51,7 @@ class Controller extends ControllersController
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
-         public function updateStatus()
+    public function updateStatus()
     {
         $data = UpdateStatus::execute();
         return $data;
@@ -73,5 +82,4 @@ class Controller extends ControllersController
         $data = BulkActions::execute($request);
         return $data;
     }
-
 }

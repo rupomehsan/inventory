@@ -66,9 +66,9 @@
                                         <th class="w-10">ID</th>
                                         <th>name</th>
                                         <th>email</th>
-                                        <th>password</th>
+                                        <th>Phone</th>
                                         <th>image</th>
-                                        <th>role_id</th>
+                                        <th>role</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -221,9 +221,12 @@
                                         <td>{{ item.id }}</td>
                                         <td>{{ item.name }}</td>
                                         <td>{{ item.email }}</td>
-                                        <td>{{ item.password }}</td>
-                                        <td>{{ item.image }}</td>
-                                        <td>{{ item.role_id }}</td>
+                                        <td>{{ item.phone_number ?? "N/A " }}</td>
+
+                                        <td>
+                                            <img :src="item.image" alt="" height="50" width="50">
+                                        </td>
+                                        <td>{{ item.role?.name }}</td>
                                     </tr>
                                 </tbody>
                             </table>
