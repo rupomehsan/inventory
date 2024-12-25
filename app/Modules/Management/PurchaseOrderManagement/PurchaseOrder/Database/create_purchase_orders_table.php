@@ -17,14 +17,15 @@ return new class extends Migration
             $table->string('title', 100)->nullable();
             $table->string('reference', 100)->nullable();
             $table->integer('suppliyer_id')->nullable();
-            $table->datetime('date')->nullable();
-            $table->integer('currency_id')->nullable();
+            $table->date('date')->nullable();
+            $table->string('currency_id')->nullable();
             $table->bigInteger('currency_exchange_rate')->nullable();
             $table->date('expected_time_of_delivery')->nullable();
             $table->bigInteger('subtotal')->nullable();
+            $table->bigInteger('other_cost')->nullable();
             $table->bigInteger('discount')->nullable();
             $table->string('total', 100)->nullable();
-            $table->bigInteger('total_in_bd')->nullable();
+            $table->bigInteger('total_in_bdt')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

@@ -2,6 +2,8 @@ import { mapActions, mapWritableState } from "pinia";
 import { store } from "..";
 
 async function set_filter_criteria(data = {}) {
+    console.log(data);
+
     let data_store = store()
     data_store.filter_criteria = {
         ...data_store.filter_criteria,

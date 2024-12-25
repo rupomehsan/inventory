@@ -293,6 +293,60 @@
                         </label>
                     </div>
                     <div class="filter_item">
+                        <label for="product_category_id">Select Category</label>
+                        <label
+                            for="product_category_id"
+                            class="text-capitalize d-block date_custom_control"
+                        >
+                            <select
+                                v-model="product_category_id"
+                                type="date"
+                                id="product_category_id"
+                                name="product_category_id"
+                                class="form-control"
+                                @change="get_sub_category(product_category_id)"
+                            >
+                                <option value="">Select category</option>
+                                <option
+                                    v-for="category in product_categories"
+                                    :key="category"
+                                    :value="category.id"
+                                >
+                                    {{ category.title }}
+                                </option>
+                            </select>
+
+                            <!-- <div class="form-control preview"></div> -->
+                        </label>
+                    </div>
+                    <div class="filter_item">
+                        <label for="product_sub_category_id"
+                            >Select Sub Category</label
+                        >
+                        <label
+                            for="product_sub_category_id"
+                            class="text-capitalize d-block date_custom_control"
+                        >
+                            <select
+                                v-model="product_sub_category_id"
+                                type="date"
+                                id="product_sub_category_id"
+                                name="product_sub_category_id"
+                                class="form-control"
+                            >
+                                <option value="">Select sub category</option>
+                                <option
+                                    :value="category.id"
+                                    v-for="category in product_sub_categories"
+                                    :key="category"
+                                >
+                                    {{ category.title }}
+                                </option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="filter_item">
                         <label for="sort_by_col">Sort By Col</label
                         ><label
                             for="sort_by_col"
@@ -408,10 +462,9 @@ import export_selected_csv from "../helpers/export_selected_csv";
 import export_demo_csv from "../helpers/export_demo_csv";
 import debounce from "../helpers/debounce";
 
-import TableHead from '../components/all_data_page/TableHead.vue';
-import TableBody from '../components/all_data_page/TableBody.vue';
+import TableHead from "../components/all_data_page/TableHead.vue";
+import TableBody from "../components/all_data_page/TableBody.vue";
 export default {
-    
     components: {
         TableHead,
         TableBody,
@@ -421,11 +474,14 @@ export default {
         setup,
         is_trashed_data: false,
         import_csv_modal_show: false,
-        filePath:
-            "resources/js/backend/Views/SuperAdmin/Management/TestModule/helpers/demo.csv",
+        product_categories: [],
+        product_sub_categories: [],
+        loaded: false,
     }),
     created: async function () {
         await this.get_all();
+        await this.get_all_categories();
+        this.loaded = true;
     },
     methods: {
         export_all_csv,
@@ -613,6 +669,22 @@ export default {
             await this.get_all();
             this.only_latest_data = false;
         }, 500),
+
+        get_all_categories: async function () {
+            let response = await axios.get("product-categories");
+            if (response.data.status == "success") {
+                this.product_categories = response.data?.data?.data || [];
+            }
+        },
+        get_sub_category: async function (category_id) {
+
+            let response = await axios.get(
+                `get-all-sub-category-by-category-id/${category_id}?get_all=true`
+            );
+            if (response.data.status == "success") {
+                this.product_sub_categories = response.data?.data?.data || [];
+            }
+        },
     },
     computed: {
         ...mapWritableState(data_store, [
@@ -629,6 +701,8 @@ export default {
             "sort_by_col",
             "start_date",
             "end_date",
+            "product_category_id",
+            "product_sub_category_id",
             "search_key",
             "page",
         ]),
@@ -663,6 +737,26 @@ export default {
             handler: function (v) {
                 let data = {
                     end_date: v,
+                };
+                this.set_filter_criteria(data);
+            },
+            deep: true,
+        },
+        product_category_id: {
+            handler: function (v) {
+
+                let data = {
+                    product_category_id: v,
+                };
+                this.set_filter_criteria(data);
+            },
+            deep: true,
+        },
+        product_sub_category_id: {
+            handler: function (v) {
+
+                let data = {
+                    product_sub_category_id: v,
                 };
                 this.set_filter_criteria(data);
             },

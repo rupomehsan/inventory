@@ -132,7 +132,7 @@ export default {
                 let response = await this.update($event);
                 // await this.get_all();
                 if ([200, 201].includes(response.status)) {
-                    window.s_alert("data updated");
+                    window.s_alert("Data successfully updated");
                     this.$router.push({
                         name: `Details${this.setup.route_prefix}`,
                     });
@@ -142,7 +142,7 @@ export default {
                 let response = await this.create($event);
                 // await this.get_all();
                 if ([200, 201].includes(response.status)) {
-                    window.s_alert("data created");
+                    window.s_alert("Data Successfully Created");
                     this.$router.push({
                         name: `All${this.setup.route_prefix}`,
                     });

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->bigInteger('currency_exchange_rate')->nullable();
             $table->date('expected_time_of_delivery')->nullable();
             $table->bigInteger('subtotal')->nullable();
+            $table->bigInteger('other_cost')->nullable();
             $table->bigInteger('discount')->nullable();
             $table->string('total', 100)->nullable();
             $table->bigInteger('total_in_bdt')->nullable();

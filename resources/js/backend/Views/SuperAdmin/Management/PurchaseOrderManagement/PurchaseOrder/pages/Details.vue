@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h5 class="text-capitalize">
-                        {{ setup.details_page_title }}
+                        {{ setup.prefix }} Log History
                     </h5>
                     <div>
                         <router-link
@@ -16,50 +16,114 @@
                     </div>
                 </div>
                 <div class="card-body card_body_fixed_height">
-                    <div class="row">
-                        <div class="col-lg-8">
+                    <div class="row gap-2 justify-content-center">
+                        <div
+                            class="col-lg-6 my-2 p-2 border rounded-3"
+                            v-for="(item, index) in item.purchase_order_logs"
+                            :key="index"
+                        >
+                            <div class="d-flex flex-wrap gap-1">
+                                <div class="w-25">
+                                    <label for="">title</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="item.title"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <label for="">Reference</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="item.reference"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <label for="">suppliyer_id</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="item.suppliyer_id"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <label for="">create date</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="
+                                                new Date(
+                                                    item.date
+                                                ).toDateString()
+                                            "
+                                        />
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <label for="">currency</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="
+                                                item.currency_id == 2
+                                                    ? 'BDT'
+                                                    : 'Chinese Yuan'
+                                            "
+                                        />
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <label for="">currency exchange rate</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="item.currency_exchange_rate"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="w-25">
+                                    <label for=""
+                                        >expected time of delivery</label
+                                    >
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="
+                                                item.expected_time_of_delivery
+                                            "
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                             <table
                                 class="table quick_modal_table table-bordered"
                             >
                                 <tbody>
-                                    <data-detials-table-body :item="item" />
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>SubTotal</th>
+                                        <th>SubTotal In BDT</th>
+                                    </tr>
+                                    <tr
+                                        v-for="product in item.purchase_order_products"
+                                        :key="product.id"
+                                    >
+                                        <td>{{ product.product_name }}</td>
+                                        <td>{{ product.quantity }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>{{ product.subtotal }}</td>
+                                        <td>{{ product.subtotal_in_bdt }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <router-link
-                        class="btn btn-outline-warning btn-sm"
-                        :to="{
-                            name: `Edit${setup.route_prefix}`,
-                            params: { id: item.slug },
-                        }"
-                    >
-                        {{ setup.edit_page_title }}
-                    </router-link>
-
-                    <a
-                        href=""
-                        v-if="item.prev_slug"
-                        @click.prevent="get_data(item.prev_slug)"
-                        class="btn btn-secondary btn-sm ml-2"
-                    >
-                        <i class="fa fa-angle-left"></i>
-                        Previous {{ setup.route_prefix }} ({{
-                            item.prev_count
-                        }})
-                    </a>
-
-                    <a
-                        href=""
-                        v-if="item.next_slug"
-                        @click.prevent="get_data(item.next_slug)"
-                        class="btn btn-secondary btn-sm ml-2"
-                    >
-                        Next {{ setup.route_prefix }} ({{ item.next_count }})
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 </div>
             </div>
         </form>
@@ -70,10 +134,10 @@
 import { mapActions, mapState, mapWritableState } from "pinia";
 import { store } from "../store";
 import setup from "../setup";
-import DataDetialsTableBody from '../components/all_data_page/DataDetialsTableBody.vue';
+import DataDetialsTableBody from "../components/all_data_page/DataDetialsTableBody.vue";
 export default {
     components: {
-        DataDetialsTableBody
+        DataDetialsTableBody,
     },
     data: () => ({
         setup,

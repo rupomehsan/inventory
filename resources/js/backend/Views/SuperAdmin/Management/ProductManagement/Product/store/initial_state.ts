@@ -19,6 +19,8 @@ export const initialState = {
     sort_type: 'DESC',
     start_date: '',
     end_date: '',
+    product_category_id: '',
+    product_sub_category_id: '',
 
     filter_criteria: {} as anyObject,
     all_data_count: 0, // total data in database

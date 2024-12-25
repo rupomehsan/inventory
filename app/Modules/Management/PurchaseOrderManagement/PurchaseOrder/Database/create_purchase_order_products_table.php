@@ -15,12 +15,13 @@ return new class extends Migration
         Schema::create('purchase_order_products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('purchase_order_id')->nullable();
+            $table->string('product_name')->nullable();
             $table->integer('product_id')->nullable();
-            $table->string('product_price', 100)->nullable();
+            $table->string('price', 100)->nullable();
             $table->integer('currency_id')->nullable();
             $table->bigInteger('quantity')->nullable();
-            $table->bigInteger('item_total')->nullable();
-            $table->bigInteger('total_in_bdt')->nullable();
+            $table->bigInteger('subtotal')->nullable();
+            $table->bigInteger('subtotal_in_bdt')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

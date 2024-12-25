@@ -11,7 +11,7 @@ class GetSingleData
     public static function execute($slug)
     {
         try {
-            $with = [];
+            $with = ['product_category:id,title', 'product_sub_category:id,title', 'suppliyer:id,name'];
             $fields = request()->input('fields') ?? ['*'];
             if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->first()) {
                 return messageResponse('Data not found...',$data, 404, 'error');

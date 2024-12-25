@@ -10,6 +10,8 @@ class GetAllData
     {
         try {
 
+
+
             $pageLimit = request()->input('limit') ?? 10;
             $orderByColumn = request()->input('sort_by_col') ?? 'id';
             $orderByType = request()->input('sort_type') ?? 'desc';
@@ -17,7 +19,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = [];
+            $with = ['product_category:id,title', 'product_sub_category:id,title', 'suppliyer:id,name'];
             $condition = [];
 
             $data = self::$model::query();
@@ -25,24 +27,25 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('title', 'like', '%' . $searchKey . '%');    
-
-    $q->orWhere('description', 'like', '%' . $searchKey . '%');    
-
-    $q->orWhere('suppliyer_id', 'like', '%' . $searchKey . '%');    
-
-    $q->orWhere('product_category_id', 'like', '%' . $searchKey . '%');    
-
-    $q->orWhere('product_sub_category_id', 'like', '%' . $searchKey . '%');              
-
+                    $q->where('title', 'like', '%' . $searchKey . '%');
+                    $q->orWhere('title', 'like', '%' . $searchKey . '%');
+                    $q->orWhere('description', 'like', '%' . $searchKey . '%');
                 });
             }
 
             if ($start_date && $end_date) {
-                 if ($end_date > $start_date) {
+                // dd(request()->input('product_category_id'));
+                if ($end_date > $start_date) {
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
                 } elseif ($end_date == $start_date) {
                     $data->whereDate('created_at', $start_date);
+                }
+
+                if (request()->input('product_category_id')) {
+                    $data->where('product_category_id', request()->input('product_category_id'));
+                }
+                if (request()->input('product_sub_category_id')) {
+                    $data->where('product_sub_category_id', request()->input('product_sub_category_id'));
                 }
             }
 
@@ -82,7 +85,6 @@ class GetAllData
                 "inactive_data_count" => self::$model::inactive()->count(),
                 "trased_data_count" => self::$model::trased()->count(),
             ]);
-
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

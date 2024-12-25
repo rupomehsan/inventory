@@ -40,4 +40,18 @@ class Model extends EloquentModel
     {
         return $q->onlyTrashed();
     }
+
+    public function product_category()
+    {
+        return $this->belongsTo('App\Modules\Management\ProductManagement\ProductCategory\Models\Model', 'product_category_id');
+    }
+    public function product_sub_category()
+    {
+        return $this->belongsTo('App\Modules\Management\ProductManagement\ProductSubCategory\Models\Model', 'product_sub_category_id');
+    }
+    public function suppliyer()
+    {
+        return $this->belongsTo('App\Modules\Management\SuppliyerManagement\Suppliyer\Models\Model', 'suppliyer_id');
+    }
+
 }

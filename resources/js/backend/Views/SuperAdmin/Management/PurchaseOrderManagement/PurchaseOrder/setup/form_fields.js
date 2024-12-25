@@ -23,7 +23,7 @@ export default [
 	{
 		name: "date",
 		label: "Enter your date",
-		type: "datetime",
+		type: "date",
 		value: "",
 	},
 

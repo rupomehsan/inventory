@@ -45,6 +45,18 @@ php artisan make:module WarehouseManagement/WarehouseProductOut [warehouse_id:in
 php artisan make:table WarehouseManagement/WarehouseProductOut/WarehouseProductOutProduct [product_id:int,product_name:string-100,quantity:bigint] --model
 php artisan make:table WarehouseManagement/WarehouseProductOut/WarehouseHasWarehouseProductOut [product_id:int,product_name:string-100,quantity:bigint] --model
 
+
+/*
+|--------------------------------------------------------------------------
+| Customer management Module
+|--------------------------------------------------------------------------
+*/
+
+
+php artisan make:module CustomerManagement/CustomerGroup [name:string-100] --vue
+php artisan make:module CustomerManagement/Customer [name:string-100,phone:string-20,email:string-50,address:string,comment:text,country:string-20] --vue
+
+
 /*
 |--------------------------------------------------------------------------
 | sales order management Module
@@ -56,7 +68,6 @@ php artisan make:module SalesOrderManagement/SalesOrder  [order_title:string-100
 php artisan make:table SalesOrderManagement/SalesOrder/SalesOrderProduct  [product_id:int,product_price:bigint,currency:string-20,item_total:bigint,item_total_in_bdt:bigint] --model
 php artisan make:table SalesOrderManagement/SalesOrder/SalesOrderLog  [sales_order_id:bigint,order_title:string-100,reference:string-50,customer_id:int,date:datetime,subtotal:bigint,due:bigint,paid:bigint,discount:bigint,total:bigint,order_status:enum-pending.due.paid,sales_order_products:json] --model
 php artisan make:table SalesOrderManagement/SalesOrder/SalesOrderHasSalesOrderProduct  [sales_order_id:bigint,sales_order_product_id:bigint] --model
-
 php artisan make:module SalesOrderManagement/SalesOrderCollectionHistory  [sales_order_id:bigint,amount:bigint] --vue
 
 
