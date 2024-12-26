@@ -15,7 +15,7 @@ export default [
 
 	{
 		name: "suppliyer_id",
-		label: "Enter your suppliyer id",
+		label: "Select  suppliyer ",
 		type: "number",
 		value: "",
 	},
@@ -29,7 +29,7 @@ export default [
 
 	{
 		name: "currency_id",
-		label: "Enter your currency id",
+		label: "Select your currency",
 		type: "number",
 		value: "",
 	},

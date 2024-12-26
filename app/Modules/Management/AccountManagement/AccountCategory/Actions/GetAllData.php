@@ -25,11 +25,11 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('title', 'like', '%' . $searchKey . '%');    
+    $q->where('title', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('type', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('type', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('parent_id', 'like', '%' . $searchKey . '%');              
+    $q->orWhere('parent_id', 'like', '%' . $searchKey . '%');
 
                 });
             }
@@ -55,6 +55,8 @@ class GetAllData
                     ->limit($pageLimit)
                     ->orderBy($orderByColumn, $orderByType)
                     ->get();
+
+                return entityResponse($data);
             } else if ($status == 'trased') {
                 $data = $data
                     ->with($with)

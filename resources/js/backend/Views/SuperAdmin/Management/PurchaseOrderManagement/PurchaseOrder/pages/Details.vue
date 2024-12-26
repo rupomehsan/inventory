@@ -7,6 +7,31 @@
                         {{ setup.prefix }} Log History
                     </h5>
                     <div>
+                        <form
+                            @submit.prevent="LogSearchHandler"
+                            class="d-flex justify-content-evenly align-items-center"
+                        >
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="start_date"
+                                id=""
+                            />
+                            <input
+                                type="date"
+                                class="form-control mx-2"
+                                name="end_date"
+                                id=""
+                            />
+                            <button
+                                type="submit"
+                                class="btn btn-outline-success"
+                            >
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div>
                         <router-link
                             class="btn btn-outline-warning btn-sm"
                             :to="{ name: `All${setup.route_prefix}` }"
@@ -19,10 +44,23 @@
                     <div class="row gap-2 justify-content-center">
                         <div
                             class="col-lg-6 my-2 p-2 border rounded-3"
-                            v-for="(item, index) in item.purchase_order_logs"
+                            v-for="(item, index) in purchase_order_logs"
                             :key="index"
                         >
                             <div class="d-flex flex-wrap gap-1">
+                                <div class="w-25">
+                                    <label for="">created date</label>
+                                    <div class="">
+                                        <input
+                                            class="form-control form-control-square mb-2"
+                                            :value="
+                                                new Date(
+                                                    item.created_at
+                                                ).toDateString()
+                                            "
+                                        />
+                                    </div>
+                                </div>
                                 <div class="w-25">
                                     <label for="">title</label>
                                     <div class="">
@@ -51,7 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="w-25">
-                                    <label for="">create date</label>
+                                    <label for=""> date</label>
                                     <div class="">
                                         <input
                                             class="form-control form-control-square mb-2"
@@ -63,6 +101,7 @@
                                         />
                                     </div>
                                 </div>
+
                                 <div class="w-25">
                                     <label for="">currency</label>
                                     <div class="">
@@ -141,10 +180,13 @@ export default {
     },
     data: () => ({
         setup,
+        purchase_order_logs: [],
     }),
     created: async function () {
         let id = (this.param_id = this.$route.params.id);
         await this.get_data(id);
+
+        this.purchase_order_logs = this.item.purchase_order_logs;
     },
     methods: {
         ...mapActions(store, {
@@ -153,6 +195,19 @@ export default {
         get_data: async function (slug) {
             this.item = {};
             await this.details(slug);
+        },
+        LogSearchHandler: async function (e) {
+            let id = (this.param_id = this.$route.params.id);
+            let formData = new FormData(e.target);
+            formData.append("slug", id);
+            let response = await axios.post(
+                `/purchase-orders/log-search`,
+                formData
+            );
+            if (response.data.status == "success") {
+                this.purchase_order_logs = response.data.data;
+                console.log(this.item);
+            }
         },
     },
     computed: {

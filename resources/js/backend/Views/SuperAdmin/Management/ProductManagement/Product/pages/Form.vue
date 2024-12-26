@@ -150,9 +150,9 @@ export default {
             }
         },
         get_all_suppliyers: async function () {
-            let response = await axios.get("suppliyers");
+            let response = await axios.get("suppliyers?get_all=1");
             if (response.data.status == "success") {
-                const suppliyers = response.data?.data?.data || [];
+                const suppliyers = response.data?.data || [];
                 this.form_fields[1].data_list = suppliyers.map((suppliyer) => ({
                     label: suppliyer.name,
                     value: suppliyer.id,
@@ -160,9 +160,9 @@ export default {
             }
         },
         get_all_categories: async function () {
-            let response = await axios.get("product-categories");
+            let response = await axios.get("product-categories?get_all=1");
             if (response.data.status == "success") {
-                const categories = response.data?.data?.data || [];
+                const categories = response.data?.data || [];
                 this.form_fields[2].data_list = categories.map((category) => ({
                     label: category.title,
                     value: category.id,
@@ -183,10 +183,10 @@ export default {
 
         get_sub_category: async function (category_id) {
             let response = await axios.get(
-                `get-all-sub-category-by-category-id/${category_id}?get_all=true`
+                `get-all-sub-category-by-category-id/${category_id}?get_all=1`
             );
             if (response.data.status == "success") {
-                const categories = response.data?.data?.data || [];
+                const categories = response.data?.data || [];
                 this.form_fields[3].data_list = categories.map((category) => ({
                     label: category.title,
                     value: category.id,

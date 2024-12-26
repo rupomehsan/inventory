@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Controller;
+use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\LogSearch;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\GetAllData;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\DestroyData;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\GetSingleData;
@@ -10,6 +11,8 @@ use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\UpdateS
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\SoftDelete;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\RestoreData;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\ImportData;
+use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\GetPurchaseOrderProductsByOrderId;
+
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Validations\BulkActionsValidation;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Validations\DataStoreValidation;
 use App\Modules\Management\PurchaseOrderManagement\PurchaseOrder\Actions\BulkActions;
@@ -71,6 +74,16 @@ class Controller extends ControllersController
     public function bulkAction(BulkActionsValidation $request)
     {
         $data = BulkActions::execute($request);
+        return $data;
+    }
+    public function logSearch()
+    {
+        $data = LogSearch::execute();
+        return $data;
+    }
+    public function GetPurchaseOrderProductsByOrderId($purchase_order_id)
+    {
+        $data = GetPurchaseOrderProductsByOrderId::execute($purchase_order_id);
         return $data;
     }
 

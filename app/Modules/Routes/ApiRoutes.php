@@ -32,3 +32,5 @@ include_once base_path("app/Modules/Management/AccountManagement/AccountCategory
 include_once base_path("app/Modules/Management/AccountManagement/AccountSubCategory/Routes/Route.php");
 include_once base_path("app/Modules/Management/AccountManagement/AccountIncome/Routes/Route.php");
 include_once base_path("app/Modules/Management/AccountManagement/AccountExpense/Routes/Route.php");
+include_once base_path("app/Modules/Management/CustomerManagement/CustomerGroup/Routes/Route.php");
+include_once base_path("app/Modules/Management/CustomerManagement/Customer/Routes/Route.php");

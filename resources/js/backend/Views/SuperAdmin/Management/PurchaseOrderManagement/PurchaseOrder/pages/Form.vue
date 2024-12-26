@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Enter your suppliyer id</label>
+                                <label for="">Slect suppliyer</label>
                                 <div class="mt-1 mb-3">
                                     <select
                                         class="form-control form-control-square mb-2"
@@ -450,9 +450,9 @@ export default {
         },
 
         get_all_products: async function () {
-            let response = await axios.get("products");
+            let response = await axios.get("products?get_all=1");
             if (response.data.status === "success") {
-                this.products = response.data?.data?.data;
+                this.products = response.data?.data;
             }
         },
 
@@ -490,9 +490,9 @@ export default {
             }
         },
         get_all_suppliyers: async function () {
-            let response = await axios.get("suppliyers");
+            let response = await axios.get("suppliyers?get_all=1");
             if (response.data.status == "success") {
-                this.suppliyers = response.data?.data?.data || [];
+                this.suppliyers = response.data?.data || [];
             }
         },
 

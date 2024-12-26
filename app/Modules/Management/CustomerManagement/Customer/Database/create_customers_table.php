@@ -7,16 +7,19 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\Management\WarehouseManagement\WarehouseProductOut\Database\create_warehouse_has_warehouse_product_outs_table.php'
+     php artisan migrate --path='\App\Modules\Management\CustomerManagement\Customer\Database\create_customers_table.php'
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('warehouse_has_warehouse_product_outs', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id')->nullable();
-            $table->string('product_name', 100)->nullable();
-            $table->bigInteger('quantity')->nullable();
+            $table->string('name', 100)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('email', 50)->nullable();
+            $table->string('address', 100)->nullable();
+            $table->text('comment')->nullable();
+            $table->string('country', 20)->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warehouse_has_warehouse_product_outs');
+        Schema::dropIfExists('customers');
     }
 };

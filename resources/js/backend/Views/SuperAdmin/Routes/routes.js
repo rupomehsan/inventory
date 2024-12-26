@@ -5,6 +5,8 @@ import Dashboard from "../Management/Dashboard/Dashboard.vue";
 //SettingsRoutes
 import SettingsRoutes from "../Management/Settings/setup/routes.js";
 //routes
+import CustomerRoutes from '../Management/CustomerManagement/Customer/setup/routes.js';
+import CustomerGroupRoutes from '../Management/CustomerManagement/CustomerGroup/setup/routes.js';
 import AccountExpenseRoutes from '../Management/AccountManagement/AccountExpense/setup/routes.js';
 import AccountIncomeRoutes from '../Management/AccountManagement/AccountIncome/setup/routes.js';
 import AccountSubCategoryRoutes from '../Management/AccountManagement/AccountSubCategory/setup/routes.js';
@@ -35,6 +37,8 @@ const routes = {
             name: 'adminDashboard',
         },
         //management routes
+        CustomerRoutes,
+        CustomerGroupRoutes,
         AccountExpenseRoutes,
         AccountIncomeRoutes,
         AccountSubCategoryRoutes,

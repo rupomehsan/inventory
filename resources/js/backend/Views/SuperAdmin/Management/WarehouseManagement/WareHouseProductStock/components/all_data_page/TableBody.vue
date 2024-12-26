@@ -34,10 +34,23 @@ export default {
 
     methods: {
         trim_content(content) {
-            if (typeof content == 'string') {
-                return content.length > 50 ? content.substring(0, 50) + '...' : content;
+            if (typeof content == "string") {
+                return content.length > 50
+                    ? content.substring(0, 50) + "..."
+                    : content;
             }
-            return content;
+            if (content && typeof content === "object") {
+                for (const key of Object.keys(content)) {
+                    if (key === "title" && content.title) {
+                        return content.title;
+                    }
+                    if (key === "name" && content.name) {
+                        return content.name;
+                    }
+                }
+            }
+
+            return content || "";
         },
     }
 }

@@ -16,11 +16,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('purchase_order_id')->nullable();
             $table->string('product_name')->nullable();
-            $table->integer('product_id')->nullable();
-            $table->string('price', 100)->nullable();
-            $table->integer('currency_id')->nullable();
-            $table->bigInteger('quantity')->nullable();
-            $table->bigInteger('subtotal')->nullable();
+            $table->bigInteger('product_id')->nullable();
+            $table->bigInteger('price')->nullable()->unsigned();
+            $table->bigInteger('currency_id')->nullable();
+            $table->bigInteger('quantity')->nullable()->unsigned();
+            $table->bigInteger('subtotal')->nullable()->unsigned();
             $table->bigInteger('subtotal_in_bdt')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();

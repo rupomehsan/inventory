@@ -85,58 +85,86 @@
                 ]"
             />
 
-
-
             <side-bar-single-menu
                 :icon="`fa fa-plus`"
                 :menu_title="`PurchaseOrder`"
                 :route_name="`AllPurchaseOrder`"
             />
-            <side-bar-single-menu
+
+            <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :menu_title="`WareHouse`"
-                :route_name="`AllWareHouse`"
+                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+                :menu_title="`WareHouse Management`"
+                :menus="[
+                    {
+                        route_name: `AllWareHouse`,
+                        title: `WareHouse`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllWareHouseProductStock`,
+                        title: `WareHouse Product Stock`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllWarehouseProductOut`,
+                        title: `Warehouse Product Out`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                ]"
             />
-            <side-bar-single-menu
+            <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :menu_title="`WareHouseProductStock`"
-                :route_name="`AllWareHouseProductStock`"
+                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+                :menu_title="`Sales Management`"
+                :menus="[
+                    {
+                        route_name: `AllCustomer`,
+                        title: `Customer`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllSalesOrder`,
+                        title: `SalesOrder`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllSalesOrderCollectionHistory`,
+                        title: `SalesOrderCollectionHistory`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                ]"
             />
-            <side-bar-single-menu
+            <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :menu_title="`WarehouseProductOut`"
-                :route_name="`AllWarehouseProductOut`"
+                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+                :menu_title="`Account Management`"
+                :menus="[
+                    {
+                        route_name: `AllAccountCategory`,
+                        title: `AccountCategory`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllAccountSubCategory`,
+                        title: `AccountSubCategory`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllAccountIncome`,
+                        title: `AccountIncome`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllAccountExpense`,
+                        title: `AccountExpense`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                ]"
             />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`SalesOrder`"
-                :route_name="`AllSalesOrder`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`SalesOrderCollectionHistory`"
-                :route_name="`AllSalesOrderCollectionHistory`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`AccountCategory`"
-                :route_name="`AllAccountCategory`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`AccountSubCategory`"
-                :route_name="`AllAccountSubCategory`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`AccountIncome`"
-                :route_name="`AllAccountIncome`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`AccountExpense`"
-                :route_name="`AllAccountExpense`"
-            />
+
+
+
             <!-- Management end -->
         </ul>
     </div>

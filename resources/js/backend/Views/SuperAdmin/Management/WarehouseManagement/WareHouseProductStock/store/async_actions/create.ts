@@ -1,9 +1,7 @@
 import axios from "axios";
 import setup from "../../setup";
 
-async function execute(event){
-    let form = event.target;
-    let form_data = new FormData(form);
+async function execute(form_data){
     let url = `${setup.api_host}/${setup.api_version}/${setup.api_end_point}/store`;
 
     try {

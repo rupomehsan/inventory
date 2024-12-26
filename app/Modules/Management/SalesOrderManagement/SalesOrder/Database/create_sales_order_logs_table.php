@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('sales_order_logs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('sales_order_id')->nullable();
-            $table->string('order_title', 100)->nullable();
+            $table->string('title', 100)->nullable();
             $table->string('reference', 50)->nullable();
             $table->integer('customer_id')->nullable();
             $table->datetime('date')->nullable();

@@ -26,6 +26,32 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="col-lg-8">
+                            <table
+                                class="table quick_modal_table table-bordered"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Stock quantity</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(
+                                            product, index
+                                        ) in item.ware_house_product_stock_products"
+                                        :key="index"
+                                    >
+                                        <td>{{ product.product_name }}</td>
+                                        <td>
+                                            {{ product.quantity }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -70,10 +96,10 @@
 import { mapActions, mapState, mapWritableState } from "pinia";
 import { store } from "../store";
 import setup from "../setup";
-import DataDetialsTableBody from '../components/all_data_page/DataDetialsTableBody.vue';
+import DataDetialsTableBody from "../components/all_data_page/DataDetialsTableBody.vue";
 export default {
     components: {
-        DataDetialsTableBody
+        DataDetialsTableBody,
     },
     data: () => ({
         setup,

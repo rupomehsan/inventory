@@ -10,6 +10,8 @@ use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\UpdateStatus;
 use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\SoftDelete;
 use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\RestoreData;
 use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\ImportData;
+use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\LogSearch;
+use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\GetSalesOrderProductsByOrderId;
 use App\Modules\Management\SalesOrderManagement\SalesOrder\Validations\BulkActionsValidation;
 use App\Modules\Management\SalesOrderManagement\SalesOrder\Validations\DataStoreValidation;
 use App\Modules\Management\SalesOrderManagement\SalesOrder\Actions\BulkActions;
@@ -71,6 +73,16 @@ class Controller extends ControllersController
     public function bulkAction(BulkActionsValidation $request)
     {
         $data = BulkActions::execute($request);
+        return $data;
+    }
+    public function logSearch()
+    {
+        $data = LogSearch::execute();
+        return $data;
+    }
+    public function GetSalesOrderProductsByOrderId($sales_order_id)
+    {
+        $data = GetSalesOrderProductsByOrderId::execute($sales_order_id);
         return $data;
     }
 

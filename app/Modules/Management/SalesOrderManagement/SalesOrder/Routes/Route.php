@@ -15,5 +15,8 @@ Route::prefix('v1')->group(function () {
         Route::post('restore', [Controller::class,'restore']);
         Route::post('import', [Controller::class,'import']);
         Route::post('bulk-action', [Controller::class, 'bulkAction']);
+        Route::post('log-search', [Controller::class, 'logSearch']);
     });
+    Route::get('get-sales-order-products-by-order-id/{sales_order_id}', [Controller::class,'GetSalesOrderProductsByOrderId']);
+
 });

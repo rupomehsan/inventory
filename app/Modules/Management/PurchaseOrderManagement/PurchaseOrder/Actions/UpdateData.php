@@ -47,6 +47,7 @@ class UpdateData
                         'price' => $product['price'],
                         'currency_id' => $product['currency_id'],
                         'quantity' => $product['quantity'],
+                        'available_for_stock' => $product['quantity'],
                         'subtotal' => $product['subtotal'],
                         'subtotal_in_bdt' => $product['subtotal_in_bdt'],
                         'creator' => auth()->user()?->id ?? null, // Optional pivot table data

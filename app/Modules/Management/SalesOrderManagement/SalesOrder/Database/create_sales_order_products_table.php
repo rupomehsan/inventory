@@ -14,11 +14,12 @@ return new class extends Migration
     {
         Schema::create('sales_order_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id')->nullable();
-            $table->bigInteger('product_price')->nullable();
-            $table->string('currency', 20)->nullable();
-            $table->bigInteger('item_total')->nullable();
-            $table->bigInteger('item_total_in_bdt')->nullable();
+            $table->bigInteger('sales_order_id')->nullable();
+            $table->string('product_name')->nullable();
+            $table->bigInteger('product_id')->nullable();
+            $table->bigInteger('price')->nullable();
+            $table->bigInteger('quantity')->nullable();
+            $table->bigInteger('subtotal')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

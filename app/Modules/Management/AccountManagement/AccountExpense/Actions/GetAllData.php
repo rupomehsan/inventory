@@ -25,17 +25,17 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('account_category_id', 'like', '%' . $searchKey . '%');    
+    $q->where('account_category_id', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('title', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('title', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('amount', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('amount', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('description', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('description', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('is_approved', 'like', '%' . $searchKey . '%');    
+    $q->orWhere('is_approved', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('user_type', 'like', '%' . $searchKey . '%');              
+    $q->orWhere('user_type', 'like', '%' . $searchKey . '%');
 
                 });
             }
@@ -61,6 +61,8 @@ class GetAllData
                     ->limit($pageLimit)
                     ->orderBy($orderByColumn, $orderByType)
                     ->get();
+
+                return entityResponse($data);
             } else if ($status == 'trased') {
                 $data = $data
                     ->with($with)

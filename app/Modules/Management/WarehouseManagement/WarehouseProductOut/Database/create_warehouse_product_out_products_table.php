@@ -14,9 +14,11 @@ return new class extends Migration
     {
         Schema::create('warehouse_product_out_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id')->nullable();
+            $table->bigInteger('ware_house_product_stock_id')->nullable();
+            $table->bigInteger('product_id')->nullable();
             $table->string('product_name', 100)->nullable();
-            $table->bigInteger('quantity')->nullable();
+            $table->bigInteger('quantity')->nullable()->unsigned();
+            $table->bigInteger('available_for_stock')->nullable()->unsigned();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('currency_id')->nullable();
             $table->bigInteger('currency_exchange_rate')->nullable();
             $table->date('expected_time_of_delivery')->nullable();
-            $table->bigInteger('subtotal')->nullable();
-            $table->bigInteger('other_cost')->nullable();
-            $table->bigInteger('discount')->nullable();
-            $table->string('total', 100)->nullable();
+            $table->bigInteger('subtotal')->nullable()->unsigned();
+            $table->bigInteger('other_cost')->nullable()->unsigned();
+            $table->bigInteger('discount')->nullable()->unsigned();
+            $table->bigInteger('total')->nullable()->unsigned();
             $table->bigInteger('total_in_bdt')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();

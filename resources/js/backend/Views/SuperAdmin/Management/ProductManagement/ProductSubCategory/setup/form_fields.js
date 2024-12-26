@@ -1,7 +1,7 @@
 export default [
 	{
 		name: "product_category_id",
-		label: "Enter your product category id",
+		label: "Select product category",
 		type: "select",
 		value: "",
         data_list: [],

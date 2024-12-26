@@ -2,9 +2,9 @@
     <span @click.prevent="active_row($event)" class="icon"></span>
     <div class="table_action_btns">
         <ul>
-            <li>
+            <!-- <li>
                 <details-btn :item="item" />
-            </li>
+            </li> -->
             <li>
                 <edit :item="item"/>
             </li>
@@ -17,6 +17,9 @@
             <li>
                 <destroy :item="item"/>
             </li>
+            <li>
+                <data-log :item="item" />
+            </li>
 
             <slot />
         </ul>
@@ -25,6 +28,7 @@
 <script>
 import active_row from '../../helpers/table_active_row';
 import Details from './action_buttons/Details.vue';
+import DataLog from './action_buttons/DataLog.vue';
 import Edit from './action_buttons/Edit.vue';
 import StatusButton from './action_buttons/StatusButton.vue';
 import DeleteRestore    from './action_buttons/DeleteRestore.vue';
@@ -39,6 +43,7 @@ export default {
     components: {
         DetailsBtn: Details,
         Edit,
+        DataLog,
         StatusButton,
         Destroy,
         DeleteRestore,

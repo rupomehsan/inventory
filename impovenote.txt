@@ -20,3 +20,12 @@
 
 date time formate when get data
 filter by default date set
+
+
+
+cahnge this system  return entityResponse([
+                ...$data->toArray(),
+                "active_data_count" => self::$model::active()->count(),
+                "inactive_data_count" => self::$model::inactive()->count(),
+                "trased_data_count" => self::$model::trased()->count(),
+            ]);

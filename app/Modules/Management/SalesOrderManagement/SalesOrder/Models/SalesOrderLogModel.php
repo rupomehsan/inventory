@@ -10,6 +10,9 @@ class SalesOrderLogModel extends EloquentModel
     use SoftDeletes;
     protected $table = "sales_order_logs";
     protected $guarded = [];
+    protected $casts = [
+        'sales_order_products' => 'array',
+    ];
 
     protected static function booted()
     {

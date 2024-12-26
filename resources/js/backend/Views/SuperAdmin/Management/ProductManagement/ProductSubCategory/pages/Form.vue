@@ -130,9 +130,9 @@ export default {
         },
 
         get_all_product_categories: async function () {
-            let response = await axios.get("product-categories");
+            let response = await axios.get("product-categories?get_all=1");
             if (response.data.status == "success") {
-                const categories = response.data?.data?.data || [];
+                const categories = response.data?.data || [];
                 this.form_fields[0].data_list = categories.map((category) => ({
                     label: category.title,
                     value: category.id,
