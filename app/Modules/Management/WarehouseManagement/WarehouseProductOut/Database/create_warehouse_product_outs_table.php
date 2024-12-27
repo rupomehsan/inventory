@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('warehouse_product_outs', function (Blueprint $table) {
             $table->id();
             $table->integer('warehouse_id')->nullable();
-            $table->string('purchase_order_id', 20)->nullable();
-            $table->datetime('date')->nullable();
+            $table->string('sales_order_id', 20)->nullable();
+            $table->date('date')->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 50)->nullable();

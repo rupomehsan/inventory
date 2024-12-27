@@ -1,4 +1,3 @@
-
 import app_config from "../../../../../../Config/app_config";
 import setup_type from "./setup_type";
 
@@ -20,8 +19,8 @@ const setup: setup_type = {
     select_fields: [
         "id",
         "warehouse_id",
-            "purchase_order_id",
-            "date",
+        "sales_order_id",
+        "date",
         "status",
         "slug",
         "created_at",
@@ -31,24 +30,24 @@ const setup: setup_type = {
     sort_by_cols: [
         "id",
         "warehouse_id",
-            "purchase_order_id",
-            "date",
+        "sales_order_id",
+        "date",
         "status",
         "created_at",
     ],
     table_header_data: [
         "id",
-        "warehouse_id",
-            "purchase_order_id",
-            "date",
+        "warehouse",
+        "sales order",
+        "date",
         "status",
         "created_at",
     ],
     table_row_data: [
         "id",
-        "warehouse_id",
-            "purchase_order_id",
-            "date",
+        "warehouse",
+        "sales_order",
+        "date",
         "status",
         "created_at",
     ],

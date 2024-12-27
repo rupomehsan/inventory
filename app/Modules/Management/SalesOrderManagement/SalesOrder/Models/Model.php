@@ -64,4 +64,9 @@ class Model extends EloquentModel
     {
         return $this->belongsTo(\App\Modules\Management\CustomerManagement\Customer\Models\Model::class, 'customer_id');
     }
+
+    public function sales_collection_histories()
+    {
+        return $this->hasMany(\App\Modules\Management\SalesOrderManagement\SalesOrderCollectionHistory\Models\Model::class, 'sales_order_id');
+    }
 }

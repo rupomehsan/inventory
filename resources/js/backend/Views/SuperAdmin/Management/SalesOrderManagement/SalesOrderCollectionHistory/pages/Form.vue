@@ -49,46 +49,89 @@
                             />
                         </template>
                     </div>
-                    <div class="row justify-content-center">
+                    <hr />
 
-                        <div class="col-lg-5 card">
+                    <div class="row justify-content-center" v-if="order_details">
+                        <div class="col-lg-5 card mx-2" >
                             <div class="card-header">
                                 <h5>Order Details</h5>
                             </div>
                             <div class="crad-body">
-                                <table>
+                                <table
+                                    class="table table-bordered table-hover table-striped my-2"
+                                >
                                     <tr>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
+                                        <th>Order Title</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.title }}</th>
                                     </tr>
-                                    <tr
-                                        v-for="product in item.sales_order_products"
-                                        :key="product.id"
-                                    >
-                                        <td>{{ product.product_name }}</td>
-                                        <td>{{ product.quantity }}</td>
-                                        <td>{{ product.price }}</td>
+                                    <tr>
+                                        <th>reference</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.reference }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>customer</th>
+                                        <th class="text-center">:</th>
+                                        <th class="text-trim">
+                                            {{ order_details.customer?.name }}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>date</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.date }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>subtotal</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.subtotal }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>total</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.total }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>paid</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.paid }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>due</th>
+                                        <th class="text-center">:</th>
+                                        <th>{{ order_details.due }}</th>
                                     </tr>
                                 </table>
                             </div>
                         </div>
-                        <div class="col-lg-5 card">
+                        <div
+                            class="col-lg-5 card mx-2"
+
+                        >
                             <div class="card-header">
                                 <h5>Order Collection History</h5>
                             </div>
                             <div class="crad-body py-2">
-                                <table class="table table-bordered table-hover table-striped ">
+                                <table
+                                    class="table table-bordered table-hover table-striped"
+                                >
                                     <tr>
-                                        <th>Date </th>
+                                        <th>Date</th>
                                         <th>Amount</th>
                                     </tr>
                                     <tr
-                                        v-for="i in 5"
-                                        :key="i"
+                                        v-for="item in order_details.sales_collection_histories"
+                                        :key="item"
                                     >
-                                        <td>sadfas</td>
-                                        <td>500</td>
+                                        <td>
+                                            {{
+                                                new Date(
+                                                    item.created_at
+                                                ).toLocaleDateString()
+                                            }}
+                                        </td>
+                                        <td>{{ item.amount }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -117,6 +160,7 @@ export default {
         setup,
         form_fields,
         param_id: null,
+        order_details: null,
     }),
     created: async function () {
         let id = (this.param_id = this.$route.params.id);
@@ -199,9 +243,17 @@ export default {
             event,
             ref
         ) {
+            if (event.target.value == "") {
+                this.order_details = null;
+                return;
+            }
             let response = await axios.get(
                 "sales-orders/" + event.target.value
             );
+
+            if (response.data.status == "success") {
+                this.order_details = response.data.data;
+            }
         },
     },
 

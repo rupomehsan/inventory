@@ -9,7 +9,7 @@ class StoreData
     static $model = \App\Modules\Management\SalesOrderManagement\SalesOrder\Models\Model::class;
     static $SalesOrderProductModel = \App\Modules\Management\SalesOrderManagement\SalesOrder\Models\SalesOrderProductModel::class;
     static $SalesOrderLogModel = \App\Modules\Management\SalesOrderManagement\SalesOrder\Models\SalesOrderLogModel::class;
-
+    static $SalesOrderCollectionHistorymodel = \App\Modules\Management\SalesOrderManagement\SalesOrderCollectionHistory\Models\Model::class;
     public static function execute($request)
     {
         try {
@@ -21,6 +21,13 @@ class StoreData
             $requestData = $request->validated();
             $requestData['order_status'] = $request->due == 0  ? 'paid' : 'due';
             if ($data = self::$model::query()->create($requestData)) {
+                if ($requestData['paid'] > 0) {
+                    self::$SalesOrderCollectionHistorymodel::create([
+                        'sales_order_id' => $data->id,
+                        'amount' => $requestData['due'],
+                        'creator' => auth()->user()?->id ?? null,
+                    ]);
+                }
                 foreach ($request->product_items as $product) {
                     $createdSalesOrderProduct = self::$SalesOrderProductModel::create([
                         'sales_order_id' => $data->id,

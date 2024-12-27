@@ -3,11 +3,9 @@ import setup from "../../setup";
 import { mapState } from "pinia";
 import { store } from "..";
 
-async function execute(event){
+async function execute(form_data){
     let state = mapState(store,['item']);
-    let form = event.target;
-    let form_data = new FormData(form);
-    form_data.append('id', state.item().id);
+
 
     let url = `${setup.api_host}/${setup.api_version}/${setup.api_end_point}/update/${state.item().slug}`;
 

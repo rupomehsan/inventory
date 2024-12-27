@@ -11,9 +11,9 @@ class GetSingleData
     public static function execute($slug)
     {
         try {
-            $with = [];
+            $with = ['sales_order:id,title,reference', 'warehouse:id,name','ware_house_product_out_products'];
             $fields = request()->input('fields') ?? ['*'];
-            if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->first()) {
+            if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->withCount('ware_house_product_out_products')->first()) {
                 return messageResponse('Data not found...',$data, 404, 'error');
             }
             return entityResponse($data);

@@ -111,6 +111,11 @@
                         title: `Warehouse Product Out`,
                         icon: `zmdi zmdi-dot-circle-alt`,
                     },
+                    {
+                        route_name: `AllWarehouseProductOut`,
+                        title: `WareHouse Swap Product`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
                 ]"
             />
             <side-bar-drop-down-menus

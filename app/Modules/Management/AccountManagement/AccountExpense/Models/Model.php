@@ -40,4 +40,9 @@ class Model extends EloquentModel
     {
         return $q->onlyTrashed();
     }
+
+    public function account_category()
+    {
+        return $this->belongsTo('App\Modules\Management\AccountManagement\AccountCategory\Models\Model', 'account_category_id');
+    }
 }

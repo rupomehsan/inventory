@@ -61,7 +61,11 @@ html {
 @-ms-viewport {
     width: device-width
 }
-
+th.text-trim {
+    white-space: normal !important;
+    word-wrap: break-word;
+    max-width: 200px;
+}
 body {
     /* background-color: #000; */
     font-family: 'Roboto', sans-serif;

@@ -17,7 +17,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = [];
+            $with = ['sales_order:id,title,reference', 'warehouse:id,name'];
             $condition = [];
 
             $data = self::$model::query();
@@ -25,17 +25,16 @@ class GetAllData
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {
-    $q->where('warehouse_id', 'like', '%' . $searchKey . '%');
+                    $q->where('warehouse_id', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('purchase_order_id', 'like', '%' . $searchKey . '%');
+                    $q->orWhere('purchase_order_id', 'like', '%' . $searchKey . '%');
 
-    $q->orWhere('date', 'like', '%' . $searchKey . '%');
-
+                    $q->orWhere('date', 'like', '%' . $searchKey . '%');
                 });
             }
 
             if ($start_date && $end_date) {
-                 if ($end_date > $start_date) {
+                if ($end_date > $start_date) {
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
                 } elseif ($end_date == $start_date) {
                     $data->whereDate('created_at', $start_date);
@@ -62,6 +61,7 @@ class GetAllData
                     ->with($with)
                     ->select($fields)
                     ->where($condition)
+                    ->withCount('ware_house_product_out_products')
                     ->orderBy($orderByColumn, $orderByType)
                     ->paginate($pageLimit);
             } else {
@@ -70,6 +70,7 @@ class GetAllData
                     ->select($fields)
                     ->where($condition)
                     ->where('status', $status)
+                    ->withCount('ware_house_product_out_products')
                     ->orderBy($orderByColumn, $orderByType)
                     ->paginate($pageLimit);
             }
@@ -80,7 +81,6 @@ class GetAllData
                 "inactive_data_count" => self::$model::inactive()->count(),
                 "trased_data_count" => self::$model::trased()->count(),
             ]);
-
         } catch (\Exception $e) {
             return messageResponse($e->getMessage(), [], 500, 'server_error');
         }

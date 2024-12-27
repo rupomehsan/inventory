@@ -10,7 +10,7 @@ class Model extends EloquentModel
     use SoftDeletes;
     protected $table = "warehouse_product_outs";
     protected $guarded = [];
-
+    protected static $WarehouseProductOutProductModel = \App\Modules\Management\WarehouseManagement\WareHouseProductOut\Models\WarehouseProductOutProductModel::class;
     protected static function booted()
     {
         static::created(function ($data) {
@@ -39,5 +39,19 @@ class Model extends EloquentModel
      public function scopeTrased($q)
     {
         return $q->onlyTrashed();
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(\App\Modules\Management\WarehouseManagement\WareHouse\Models\Model::class, 'warehouse_id');
+    }
+
+    public function sales_order(){
+        return $this->belongsTo(\App\Modules\Management\SalesOrderManagement\SalesOrder\Models\Model::class, 'sales_order_id');
+    }
+
+    public function ware_house_product_out_products()
+    {
+        return $this->hasMany(self::$WarehouseProductOutProductModel, 'ware_house_product_out_id');
     }
 }

@@ -18,6 +18,37 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="">Select sales order </label>
+                                <div class="mt-1 mb-3">
+                                    <select
+                                        class="form-control form-control-square mb-2"
+                                        type="number"
+                                        name="sales_order_id"
+                                        id="sales_order_id"
+                                        v-model="formData.sales_order_id"
+                                        @change="
+                                            get_all_product_by_sales_order_id(
+                                                formData.sales_order_id
+                                            )
+                                        "
+                                    >
+                                        <option value="">Select sales order</option>
+                                        <option
+                                            v-for="item in sales_orders"
+                                            :key="item"
+                                            :value="item.id"
+                                        >
+                                            {{
+                                                `${item.title}-${item.reference}`
+                                            }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <!--v-if--><!--v-if--><!--v-if-->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="">Select warehouse </label>
                                 <div class="mt-1 mb-3">
                                     <select
@@ -40,37 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Select purchase order </label>
-                                <div class="mt-1 mb-3">
-                                    <select
-                                        class="form-control form-control-square mb-2"
-                                        type="number"
-                                        name="purchase_order_id"
-                                        id="purchase_order_id"
-                                        v-model="formData.purchase_order_id"
-                                        @change="
-                                            get_all_product_by_order_id(
-                                                formData.purchase_order_id
-                                            )
-                                        "
-                                    >
-                                        <option value="">Select order</option>
-                                        <option
-                                            v-for="item in purchase_orders"
-                                            :key="item"
-                                            :value="item.id"
-                                        >
-                                            {{
-                                                `${item.title}-${item.reference}`
-                                            }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <!--v-if--><!--v-if--><!--v-if-->
-                            </div>
-                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Select date</label>
@@ -119,7 +120,7 @@
                                 <tr>
                                     <th>Product Name</th>
                                     <th>quantity</th>
-                                    <th>Available for stock quantity</th>
+                                    <!-- <th>Available for out quantity</th> -->
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -150,14 +151,14 @@
                                             v-model="item.quantity"
                                         />
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <input
                                             class="form-control form-control-square"
                                             type="number"
-                                            v-model="item.available_for_stock"
+                                            v-model="item.available_for_out"
                                             readonly
                                         />
-                                    </td>
+                                    </td> -->
 
                                     <td>
                                         <button
@@ -199,12 +200,12 @@ export default {
         form_fields,
         param_id: null,
         warehouses: [],
-        purchase_orders: [],
+        sales_orders: [],
         products: [],
 
         formData: {
             warehouse_id: "",
-            purchase_order_id: "",
+            sales_order_id: "",
             date: "",
             product_items: [],
         },
@@ -217,7 +218,7 @@ export default {
         }
 
         await this.get_all_warehouses();
-        await this.get_all_purchase_orders();
+        await this.get_all_sales_orders();
     },
     methods: {
         ...mapActions(store, {
@@ -237,15 +238,14 @@ export default {
             await this.details(id);
             if (this.item) {
                 this.formData.warehouse_id = this.item.warehouse_id;
-                this.formData.purchase_order_id = this.item.purchase_order_id;
-                this.formData.suppliyer_id = this.item.suppliyer_id;
+                this.formData.sales_order_id = this.item.sales_order_id;
                 this.formData.date = this.item.date;
 
                 this.formData.product_items =
-                    this.item.ware_house_product_stock_products;
+                    this.item.ware_house_product_out_products;
 
                 this.get_all_product_by_order_id(
-                    this.formData.purchase_order_id
+                    this.formData.sales_order_id
                 );
             }
         },
@@ -289,13 +289,12 @@ export default {
             this.formData.product_items.push({
                 product_id: product.product_id,
                 product_name: product.product_name,
-                quantity: 0,
-                available_for_stock: product.available_for_stock,
+                quantity:product.quantity,
             });
         },
-        get_all_product_by_order_id: async function (id) {
+        get_all_product_by_sales_order_id: async function (id) {
             let response = await axios.get(
-                `get-purchase-order-products-by-order-id/${id}`
+                `get-sales-order-products-by-order-id/${id}`
             );
             if (response.data.status === "success") {
                 this.products = response.data?.data;
@@ -313,10 +312,10 @@ export default {
                 this.warehouses = response.data?.data?.data || [];
             }
         },
-        get_all_purchase_orders: async function () {
-            let response = await axios.get("purchase-orders");
+        get_all_sales_orders: async function () {
+            let response = await axios.get("sales-orders");
             if (response.data.status == "success") {
-                this.purchase_orders = response.data?.data?.data || [];
+                this.sales_orders = response.data?.data?.data || [];
             }
         },
     },

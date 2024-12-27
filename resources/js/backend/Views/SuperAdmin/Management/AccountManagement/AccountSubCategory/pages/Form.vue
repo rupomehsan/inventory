@@ -49,6 +49,7 @@ import { mapActions, mapState } from "pinia";
 import { store } from "../store";
 import setup from "../setup";
 import form_fields from "../setup/form_fields";
+import axios from 'axios';
 
 export default {
     data: () => ({
@@ -62,6 +63,8 @@ export default {
         if (id) {
             this.set_fields(id);
         }
+
+        await this.get_all_account_categories();
     },
     methods: {
         ...mapActions(store, {
@@ -106,6 +109,20 @@ export default {
                     window.s_alert("Data Successfully Created");
                     this.$router.push({ name: `All${this . setup . route_prefix}` });
                 }
+            }
+        },
+
+        get_all_account_categories: async function () {
+           let response = await axios.get('account-categories?get_all=1');
+            if (response.data.status == 'success') {
+                response = response.data.data;
+                this.form_fields[0].data_list = [];
+                response.forEach((item) => {
+                    let dataList = {}
+                    dataList.label = item.title;
+                    dataList.value = item.id;
+                    this.form_fields[0].data_list.push(dataList);
+                })
             }
         },
     },
