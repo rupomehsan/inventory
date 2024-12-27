@@ -13,7 +13,7 @@ class GetSingleData
         try {
             $with = ['sales_order_products', 'sales_order_logs'];
             $fields = request()->input('fields') ?? ['*'];
-            if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->first()) {
+            if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->orWhere('id', $slug)->first()) {
                 return messageResponse('Data not found...',$data, 404, 'error');
             }
             return entityResponse($data);

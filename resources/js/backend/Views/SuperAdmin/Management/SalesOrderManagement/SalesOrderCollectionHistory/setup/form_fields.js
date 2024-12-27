@@ -1,9 +1,11 @@
 export default [
 	{
 		name: "sales_order_id",
-		label: "Enter your sales order id",
-		type: "number",
+		label: "Select sales order",
+		type: "select",
 		value: "",
+        data_list: [],
+        onchangeAction: "get_sales_order_collection_history_by_sales_order_id",
 	},
 
 	{

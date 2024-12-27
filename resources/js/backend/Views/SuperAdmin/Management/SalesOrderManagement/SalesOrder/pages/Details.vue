@@ -53,6 +53,7 @@
                                     <div class="">
                                         <input
                                             class="form-control form-control-square mb-2"
+                                            readonly
                                             :value="
                                                 new Date(
                                                     item.created_at
@@ -66,6 +67,7 @@
                                     <div class="">
                                         <input
                                             class="form-control form-control-square mb-2"
+                                            readonly
                                             :value="item.title"
                                         />
                                     </div>
@@ -75,6 +77,7 @@
                                     <div class="">
                                         <input
                                             class="form-control form-control-square mb-2"
+                                            readonly
                                             :value="item.reference"
                                         />
                                     </div>
@@ -84,6 +87,7 @@
                                     <div class="">
                                         <input
                                             class="form-control form-control-square mb-2"
+                                            readonly
                                             :value="item.customer_id"
                                         />
                                     </div>

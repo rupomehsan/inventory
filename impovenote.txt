@@ -29,3 +29,36 @@ cahnge this system  return entityResponse([
                 "inactive_data_count" => self::$model::inactive()->count(),
                 "trased_data_count" => self::$model::trased()->count(),
             ]);
+
+
+  onchange: {
+            required: false,
+            type: Function,
+            default: () => "",
+        },
+        onchangeAction: {
+            required: false,
+            type: String,
+            default: null,
+        },
+
+
+ errorReset(event) {
+            let currentElement = event.target;
+            let nextElement = currentElement.nextElementSibling;
+            if (nextElement) {
+                currentElement.classList.remove("border-warning");
+                nextElement.remove();
+            }
+            if (this.onchange) {
+                if (this.onchangeAction) { 
+                    this.onchange(this.onchangeAction, event, this);
+                } else {
+                    this.onchange(event);
+                }
+            }
+        },
+
+ changeAction: function (actionTitle, event, ref) {
+            this[actionTitle](actionTitle, event, ref);
+        },

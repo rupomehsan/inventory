@@ -25,10 +25,5 @@ export default [
 		value: "",
 	},
 
-	{
-		name: "parent_id",
-		label: "Enter your parent id",
-		type: "number",
-		value: "",
-	},
+
 ];
