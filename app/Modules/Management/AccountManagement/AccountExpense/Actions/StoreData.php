@@ -9,7 +9,9 @@ class StoreData
     public static function execute($request)
     {
         try {
+
             $requestData = $request->validated();
+            $requestData['is_approved'] = auth()->user()->role_id == 1 ? 1 : 0;
             if ($data = self::$model::query()->create($requestData)) {
                 return messageResponse('Item added successfully', $data, 201);
             }

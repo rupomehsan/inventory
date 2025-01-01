@@ -112,12 +112,13 @@
                         icon: `zmdi zmdi-dot-circle-alt`,
                     },
                     {
-                        route_name: `AllWarehouseProductOut`,
-                        title: `WareHouse Swap Product`,
+                        route_name: `AllWarehouseSwapProduct`,
+                        title: `WarehouseSwapProduct`,
                         icon: `zmdi zmdi-dot-circle-alt`,
                     },
                 ]"
             />
+
             <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
                 :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
@@ -165,9 +166,13 @@
                         title: `AccountExpense`,
                         icon: `zmdi zmdi-dot-circle-alt`,
                     },
+                    {
+                        route_name: `AllPendingVoucher`,
+                        title: `Pending Voucher`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
                 ]"
             />
-
 
 
             <!-- Management end -->

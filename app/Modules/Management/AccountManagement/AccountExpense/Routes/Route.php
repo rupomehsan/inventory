@@ -3,7 +3,7 @@
 use App\Modules\Management\AccountManagement\AccountExpense\Controller\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('auth:api')->group(function () {
     Route::prefix('account-expenses')->group(function () {
         Route::get('', [Controller::class,'index']);
         Route::get('{slug}', [Controller::class,'show']);

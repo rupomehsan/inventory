@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('price')->nullable()->unsigned();
             $table->bigInteger('currency_id')->nullable();
             $table->bigInteger('quantity')->nullable()->unsigned();
+            $table->bigInteger('available_for_stock')->nullable()->unsigned();
             $table->bigInteger('subtotal')->nullable()->unsigned();
             $table->bigInteger('subtotal_in_bdt')->nullable();
 

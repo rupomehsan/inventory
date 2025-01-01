@@ -27,8 +27,8 @@ class Seeder extends SeederClass
             'role_id' => 1,
         ]);
         self::$model::create([
-            'name' => "admin",
-            'email' => "admin@gmail.com",
+            'name' => "employee",
+            'email' => "employee@gmail.com",
             'password' => Hash::make('@12345678'),
             'image' => 'avatar.png',
             'role_id' => 2,

@@ -10,6 +10,9 @@ class GetAllData
     {
         try {
 
+
+
+
             $pageLimit = request()->input('limit') ?? 10;
             $orderByColumn = request()->input('sort_by_col') ?? 'id';
             $orderByType = request()->input('sort_type') ?? 'desc';
@@ -21,6 +24,19 @@ class GetAllData
             $condition = [];
 
             $data = self::$model::query();
+
+            if (request()->has('status') && request()->input('status')) {
+                if (request()->input('status') == 'pending_voucher') {
+                    $data = $data->where('is_approved', 0);
+                }
+            }
+
+
+
+
+
+
+
 
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
@@ -70,14 +86,16 @@ class GetAllData
                     ->orderBy($orderByColumn, $orderByType)
                     ->paginate($pageLimit);
             } else {
+
                 $data = $data
                     ->with($with)
                     ->select($fields)
                     ->where($condition)
-                    ->where('status', $status)
                     ->orderBy($orderByColumn, $orderByType)
                     ->paginate($pageLimit);
             }
+
+
 
             return entityResponse([
                 ...$data->toArray(),

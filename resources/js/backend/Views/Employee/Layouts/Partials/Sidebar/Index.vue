@@ -46,65 +46,7 @@
             <!-- Management start -->
 
 
-            <side-bar-drop-down-menus
-                :icon="`fa fa-plus`"
-                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
-                :menu_title="`Product Management`"
-                :menus="[
-                    {
-                        route_name: `AllProductCategory`,
-                        title: `Product Category`,
-                        icon: `zmdi zmdi-dot-circle-alt`,
-                    },
-                    {
-                        route_name: `AllProductSubCategory`,
-                        title: `Product SubCategory`,
-                        icon: `zmdi zmdi-dot-circle-alt`,
-                    },
-                    {
-                        route_name: `AllProduct`,
-                        title: `Product`,
-                        icon: `zmdi zmdi-dot-circle-alt`,
-                    },
-                ]"
-            />
 
-
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`Suppliyer`"
-                :route_name="`AllSuppliyer`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`PurchaseOrder`"
-                :route_name="`AllPurchaseOrder`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`WareHouse`"
-                :route_name="`AllWareHouse`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`WareHouseProductStock`"
-                :route_name="`AllWareHouseProductStock`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`WarehouseProductOut`"
-                :route_name="`AllWarehouseProductOut`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`SalesOrder`"
-                :route_name="`AllSalesOrder`"
-            />
-            <side-bar-single-menu
-                :icon="`fa fa-plus`"
-                :menu_title="`SalesOrderCollectionHistory`"
-                :route_name="`AllSalesOrderCollectionHistory`"
-            />
             <side-bar-single-menu
                 :icon="`fa fa-plus`"
                 :menu_title="`AccountCategory`"

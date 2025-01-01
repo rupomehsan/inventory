@@ -15,6 +15,7 @@ include_once base_path("app/Modules/Management/UserManagement/Role/Routes/Route.
 include_once base_path("app/Modules/Management/UserManagement/User/Routes/Route.php");
 
 
+include_once base_path("app/Modules/Management/Dashboard/Routes/Route.php");
 include_once base_path("app/Modules/Management/SettingManagement/WebsiteSettings/Routes/Route.php");
 
 
@@ -34,3 +35,4 @@ include_once base_path("app/Modules/Management/AccountManagement/AccountIncome/R
 include_once base_path("app/Modules/Management/AccountManagement/AccountExpense/Routes/Route.php");
 include_once base_path("app/Modules/Management/CustomerManagement/CustomerGroup/Routes/Route.php");
 include_once base_path("app/Modules/Management/CustomerManagement/Customer/Routes/Route.php");
+include_once base_path("app/Modules/Management/WarehouseManagement/WarehouseSwapProduct/Routes/Route.php");

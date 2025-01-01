@@ -44,6 +44,7 @@ php artisan make:table WarehouseManagement/WareHouseProductStock/WareHouseProduc
 php artisan make:module WarehouseManagement/WarehouseProductOut [warehouse_id:int,purchase_order_id:string-20,date:datetime] --vue
 php artisan make:table WarehouseManagement/WarehouseProductOut/WarehouseProductOutProduct [product_id:int,product_name:string-100,quantity:bigint] --model
 php artisan make:table WarehouseManagement/WarehouseProductOut/WarehouseHasWarehouseProductOut [product_id:int,product_name:string-100,quantity:bigint] --model
+php artisan make:module WarehouseManagement/WarehouseSwapProduct [from_warehouse_id:bigint,to_warehouse_id:bigint,quantity:bigint] --vue
 
 
 /*
