@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id', 100)->nullable();
             $table->string('title', 100)->nullable();
             $table->string('reference', 100)->nullable();
             $table->integer('suppliyer_id')->nullable();

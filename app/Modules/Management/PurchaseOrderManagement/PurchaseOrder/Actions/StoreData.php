@@ -23,6 +23,7 @@ class StoreData
             $requestData['other_cost'] = $request->update_total_price['other_cost'] ?? 0;;
             $requestData['total'] = $request->update_total_price['total'] ?? 0;
             $requestData['total_in_bdt'] = $request->update_total_price['total_in_bdt'] ?? 0;
+            $requestData['order_id'] = "PO-".uniqid();
 
             if ($data = self::$model::query()->create($requestData)) {
                 foreach ($request->product_items as $product) {

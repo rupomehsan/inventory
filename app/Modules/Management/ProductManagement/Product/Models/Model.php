@@ -5,11 +5,16 @@ namespace App\Modules\Management\ProductManagement\Product\Models;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Model extends EloquentModel
 {
     use SoftDeletes;
     protected $table = "products";
     protected $guarded = [];
+
+    protected $appends = ['total_stock_quantity'];
+
+    protected static $ProductStockModel = \App\Modules\Management\WareHouseManagement\WareHouseProductStock\Models\WareHouseProductStockProductModel::class;
 
     protected static function booted()
     {
@@ -32,11 +37,11 @@ class Model extends EloquentModel
         return $q->where('status', 'active');
     }
 
-     public function scopeInactive($q)
+    public function scopeInactive($q)
     {
         return $q->where('status', 'inactive');
     }
-     public function scopeTrased($q)
+    public function scopeTrased($q)
     {
         return $q->onlyTrashed();
     }
@@ -54,4 +59,9 @@ class Model extends EloquentModel
         return $this->belongsTo('App\Modules\Management\SuppliyerManagement\Suppliyer\Models\Model', 'suppliyer_id');
     }
 
+    public function getTotalStockQuantityAttribute()
+    {
+        $quantity = self::$ProductStockModel::where('product_id', $this->id)->sum('quantity');
+        return $quantity;
+    }
 }

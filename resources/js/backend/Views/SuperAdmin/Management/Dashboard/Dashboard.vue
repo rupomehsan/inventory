@@ -203,7 +203,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>title</th>
+                                <th>Order Id</th>
                                 <th>reference</th>
                                 <th>suppliyer</th>
                                 <th>total</th>
@@ -212,15 +212,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in data?.getLatesOrders">
+                            <tr v-for="(item, index) in data?.getLatesOrders" :key="index">
                                 <td>{{ index + 1 }}</td>
-                                <td>{{ item.title ?? "N/A" }}</td>
+                                <td>{{ item.Order_id ?? "N/A" }}</td>
                                 <td>{{ item.reference ?? "N/A" }}</td>
-                                <td>{{ item.date ?? "N/A" }}</td>
                                 <td>{{ item.suppliyer?.name ?? "N/A" }}</td>
-                                <td>{{ item.created_at ?? "N/A" }}</td>
+                                <td>{{ item.total ?? "N/A" }}</td>
+                                <td>{{ item.date ?? "N/A" }}</td>
                                 <td>
-                                    <router-link>
+                                    <router-link :to="{name : 'EditPurchaseOrder', params : {id : item.slug} }">
                                         <button class="btn btn-info">
                                             View
                                         </button>
@@ -242,7 +242,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>title</th>
+                                <th>Order Id</th>
                                 <th>reference</th>
                                 <th>costomer</th>
                                 <th>total</th>
@@ -251,15 +251,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in data?.getLatesOrders">
+                            <tr v-for="(item, index) in data?.getLatesSalesOrders" :key="index">
                                 <td>{{ index + 1 }}</td>
-                                <td>{{ item.title ?? "N/A" }}</td>
+                                <td>{{ item.order_id ?? "N/A" }}</td>
                                 <td>{{ item.reference ?? "N/A" }}</td>
+                                <td >{{ item.customer?.name.substring(0, 10) ?? "N/A" }}</td>
+                                <td>{{ item.total ?? "N/A" }}</td>
                                 <td>{{ item.date ?? "N/A" }}</td>
-                                <td>{{ item.customer?.name ?? "N/A" }}</td>
-                                <td>{{ item.created_at ?? "N/A" }}</td>
                                 <td>
-                                    <router-link>
+                                    <router-link :to="{name : 'EditSalesOrder', params : {id : item.slug} }">
                                         <button class="btn btn-info">
                                             View
                                         </button>

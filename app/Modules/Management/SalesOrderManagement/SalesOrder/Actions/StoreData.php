@@ -20,11 +20,12 @@ class StoreData
 
             $requestData = $request->validated();
             $requestData['order_status'] = $request->due == 0  ? 'paid' : 'due';
+            $requestData['order_id'] = "SO-".uniqid();
             if ($data = self::$model::query()->create($requestData)) {
                 if ($requestData['paid'] > 0) {
                     self::$SalesOrderCollectionHistorymodel::create([
                         'sales_order_id' => $data->id,
-                        'amount' => $requestData['due'],
+                        'amount' => $requestData['paid'],
                         'creator' => auth()->user()?->id ?? null,
                     ]);
                 }

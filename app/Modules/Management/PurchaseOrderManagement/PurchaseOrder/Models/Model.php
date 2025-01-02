@@ -59,4 +59,8 @@ class Model extends EloquentModel
     {
         return $this->hasMany(self::$PurchaseOrderLogModel, 'purchase_order_id');
     }
+
+    public function suppliyer(){
+        return $this->belongsTo(\App\Modules\Management\SuppliyerManagement\Suppliyer\Models\Model::class, 'suppliyer_id');
+    }
 }

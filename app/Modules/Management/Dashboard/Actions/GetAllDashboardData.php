@@ -12,6 +12,8 @@ class GetAllDashboardData
     {
         try {
 
+        
+
             $data = [];
 
             $getTotalProducts = self::GetTotalProducts();
@@ -24,8 +26,8 @@ class GetAllDashboardData
             $getTotalIncomes = self::GetTotalIncomes();
             $getTotalSalesOrders = self::GetTotalSalesOrders();
             $getTotalProductStocks = self::GetTotalProductStocks();
-            $getLatesPurchaseOrders = self::$PurchaseOrders::with('supplier')->latest()->take(5)->get();
-            $getLatesSalesOrders = self::$SalesOrders::with('customer')->latest()->take(5)->get();
+            $getLatesPurchaseOrders = self::$PurchaseOrders::with('suppliyer')->latest()->take(10)->get();
+            $getLatesSalesOrders = self::$SalesOrders::with('customer')->latest()->take(10)->get();
 
 
             $data['getLatesOrders'] = $getLatesPurchaseOrders;
