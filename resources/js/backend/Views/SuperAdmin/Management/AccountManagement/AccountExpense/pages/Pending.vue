@@ -119,7 +119,7 @@
                           @change="updateStatus($event, item)"
                         />
                         <label class="custom-control-label" :for="'customSwitch' + item.id">
-                          {{ item.is_approved ? "Approved" : "Not Approved" }}
+                          {{ item.is_approved == 1 ? "Approved" : "Not Approved" }}
                         </label>
                       </div>
                     </td>
