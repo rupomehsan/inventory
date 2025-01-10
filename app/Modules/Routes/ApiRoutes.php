@@ -37,3 +37,4 @@ include_once base_path("app/Modules/Management/CustomerManagement/CustomerGroup/
 include_once base_path("app/Modules/Management/CustomerManagement/Customer/Routes/Route.php");
 include_once base_path("app/Modules/Management/WarehouseManagement/WarehouseSwapProduct/Routes/Route.php");
 include_once base_path("app/Modules/Management/SuppliyerManagement/SuppliyerGroup/Routes/Route.php");
+include_once base_path("app/Modules/Management/Reporting/Routes/Route.php");

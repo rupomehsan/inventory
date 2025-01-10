@@ -46,7 +46,7 @@
             <!-- Management start -->
             <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+              
                 :menu_title="`User Management`"
                 :menus="[
                     {
@@ -59,7 +59,7 @@
 
             <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+              
                 :menu_title="`Product Management`"
                 :menus="[
                     {
@@ -93,7 +93,7 @@
 
             <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+              
                 :menu_title="`WareHouse Management`"
                 :menus="[
                     {
@@ -121,7 +121,7 @@
 
             <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+              
                 :menu_title="`Sales Order`"
                 :menus="[
                     {
@@ -143,7 +143,7 @@
             />
             <side-bar-drop-down-menus
                 :icon="`fa fa-plus`"
-                :icon_image="`https://files.etek.com.bd/images/icon_sales.png`"
+              
                 :menu_title="`Account Management`"
                 :menus="[
                     {
@@ -171,6 +171,30 @@
                         title: `Pending Voucher`,
                         icon: `zmdi zmdi-dot-circle-alt`,
                     },
+                ]"
+            />
+
+            <side-bar-drop-down-menus
+                :icon="`fa fa-plus`"
+              
+                :menu_title="`Report Management`"
+                :menus="[
+                    {
+                        route_name: `AllIncomeReport`,
+                        title: `IncomeReport`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllExpenseReport`,
+                        title: `ExpsenseReport`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                    {
+                        route_name: `AllIncomeExpenseReport`,
+                        title: `IncomeExpenseReport`,
+                        icon: `zmdi zmdi-dot-circle-alt`,
+                    },
+                   
                 ]"
             />
 

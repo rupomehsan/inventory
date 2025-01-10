@@ -24,7 +24,7 @@
             {{ item.amount ?? "N/A" }}
         </td>
         <td class="text-wrap max-w-120">
-            {{ item.is_approved ? "Approved" : "Pending" }}
+            {{ item.is_approved == 1 ? "Approved" : "Pending" }}
         </td>
         <td class="text-wrap max-w-120">
             {{ item.created_at }}

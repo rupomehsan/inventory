@@ -13,6 +13,8 @@ use App\Modules\Management\AccountManagement\AccountIncome\Actions\ImportData;
 use App\Modules\Management\AccountManagement\AccountIncome\Validations\BulkActionsValidation;
 use App\Modules\Management\AccountManagement\AccountIncome\Validations\DataStoreValidation;
 use App\Modules\Management\AccountManagement\AccountIncome\Actions\BulkActions;
+
+
 use App\Http\Controllers\Controller as ControllersController;
 
 
@@ -73,5 +75,7 @@ class Controller extends ControllersController
         $data = BulkActions::execute($request);
         return $data;
     }
+   
+   
 
 }

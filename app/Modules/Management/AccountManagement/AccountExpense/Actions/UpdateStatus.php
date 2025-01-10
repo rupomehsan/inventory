@@ -14,8 +14,8 @@ class UpdateStatus
                 return messageResponse('Data not found...', $data, 404, 'error');
             }
 
-            if (request('is_approved_status') !== null) {
-                $data->is_approved = request('is_approved_status')  ? 1 : 0;
+            if (request('is_approved') !== null) {
+                $data->is_approved = request('is_approved')  ? 1 : 0;
             } else {
                 $data->status = ($data->status === 'active') ? 'inactive' : 'active';
             }
