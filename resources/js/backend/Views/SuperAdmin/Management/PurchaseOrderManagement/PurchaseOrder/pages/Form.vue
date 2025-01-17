@@ -50,7 +50,6 @@
                                 <div class="mt-1 mb-3">
                                     <select
                                         class="form-control form-control-square mb-2"
-                                        type="number"
                                         name="suppliyer_id"
                                         id="suppliyer_id"
                                         v-model="formData.suppliyer_id"
@@ -91,7 +90,7 @@
                                 <div class="mt-1 mb-3">
                                     <select
                                         class="form-control form-control-square mb-2"
-                                        type="number"
+                                   
                                         name="currency_id"
                                         id="currency_id"
                                         v-model="formData.currency_id"

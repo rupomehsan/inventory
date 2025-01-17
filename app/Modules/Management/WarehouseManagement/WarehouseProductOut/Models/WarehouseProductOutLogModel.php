@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Modules\Management\WarehouseManagement\WareHouseProductStock\Models;
+namespace App\Modules\Management\WarehouseManagement\WarehouseProductOut\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WareHouseProductStockProductModel extends EloquentModel
+class WarehouseProductOutLogModel extends EloquentModel
 {
     use SoftDeletes;
-    protected $table = "ware_house_product_stock_products";
+    protected $table = "warehouse_product_out_logs";
     protected $guarded = [];
-    protected static $WareHouseProductStockModel = \App\Modules\Management\WarehouseManagement\WareHouseProductStock\Models\Model::class;
+    protected $casts = [
+        'data' => 'array'
+    ];
+
     protected static function booted()
     {
         static::created(function ($data) {
@@ -40,20 +43,5 @@ class WareHouseProductStockProductModel extends EloquentModel
     public function scopeTrased($q)
     {
         return $q->onlyTrashed();
-    }
-
-
-    /**
-     * Get the warehouse product stock that owns the WareHouseProductStockProductModel
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function warehouse_product_stock(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(
-            self::$WareHouseProductStockModel,
-            'id',
-            'ware_house_product_stock_id'
-        );
     }
 }

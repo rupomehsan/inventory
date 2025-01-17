@@ -10,6 +10,7 @@ use App\Modules\Management\WarehouseManagement\WareHouse\Actions\UpdateStatus;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\SoftDelete;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\RestoreData;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\ImportData;
+use App\Modules\Management\WarehouseManagement\WareHouse\Actions\GetProductRelatedWarehouseByOrderIdAndProductId;
 use App\Modules\Management\WarehouseManagement\WareHouse\Validations\BulkActionsValidation;
 use App\Modules\Management\WarehouseManagement\WareHouse\Validations\DataStoreValidation;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\BulkActions;
@@ -71,6 +72,11 @@ class Controller extends ControllersController
     public function bulkAction(BulkActionsValidation $request)
     {
         $data = BulkActions::execute($request);
+        return $data;
+    }
+    public function GetProductRelatedWarehouseByOrderIdAndProductId()
+    {
+        $data = GetProductRelatedWarehouseByOrderIdAndProductId::execute();
         return $data;
     }
 

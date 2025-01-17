@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('product_name', 100)->nullable();
             $table->bigInteger('quantity')->nullable()->unsigned();
             $table->bigInteger('available_for_out')->nullable()->unsigned();
+            $table->bigInteger('available_for_out')->nullable()->unsigned();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 150)->nullable();

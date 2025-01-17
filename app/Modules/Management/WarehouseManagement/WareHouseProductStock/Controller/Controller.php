@@ -11,6 +11,7 @@ use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Actions\Sof
 use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Actions\RestoreData;
 use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Actions\ImportData;
 use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Actions\GetWarehouseProductAvailableStockQuantity;
+use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Actions\GetProductStockQuantityByProductId;
 use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Validations\BulkActionsValidation;
 use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Validations\DataStoreValidation;
 use App\Modules\Management\WarehouseManagement\WareHouseProductStock\Actions\BulkActions;
@@ -77,6 +78,11 @@ class Controller extends ControllersController
     public function GetWarehouseProductAvailableStockQuantity()
     {
         $data = GetWarehouseProductAvailableStockQuantity::execute();
+        return $data;
+    }
+    public function GetProductStockQuantityByProductId($product_id)
+    {
+        $data = GetProductStockQuantityByProductId::execute($product_id);
         return $data;
     }
 

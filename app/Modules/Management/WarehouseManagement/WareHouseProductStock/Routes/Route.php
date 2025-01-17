@@ -18,4 +18,5 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('get-warehouse-product-available-stock-quantity', [Controller::class, 'GetWarehouseProductAvailableStockQuantity']);
+    Route::get('get-product-stock-quantity-by-product-id/{product_id}', [Controller::class, 'GetProductStockQuantityByProductId']);
 });

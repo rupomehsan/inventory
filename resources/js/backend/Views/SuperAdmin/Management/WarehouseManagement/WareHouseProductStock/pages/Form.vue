@@ -46,7 +46,7 @@
                                 <div class="mt-1 mb-3">
                                     <select
                                         class="form-control form-control-square mb-2"
-                                        type="number"
+                                      
                                         name="purchase_order_id"
                                         id="purchase_order_id"
                                         v-model="formData.purchase_order_id"
