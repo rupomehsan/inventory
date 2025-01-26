@@ -19,7 +19,8 @@ return new class extends Migration
             $table->bigInteger('amount')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('is_approved')->default(0);
-            $table->enum('user_type', ['admin','employee'])->nullable();
+            $table->enum('user_type', ['admin', 'employee'])->nullable();
+            $table->tinyInteger('is_seen')->default(0);
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 150)->nullable();

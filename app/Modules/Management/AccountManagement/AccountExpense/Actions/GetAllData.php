@@ -32,9 +32,9 @@ class GetAllData
             }
 
 
-
-
-
+            if (request()->has('is_seen')) {
+                $condition['is_seen'] = request()->input('is_seen');
+            }
 
 
 

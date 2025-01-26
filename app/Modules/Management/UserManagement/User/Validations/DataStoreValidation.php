@@ -43,7 +43,7 @@ class DataStoreValidation extends FormRequest
     {
         return [
             'name' => 'required | sometimes',
-            'email' => 'required | sometimes',
+            'email' => 'required | sometimes ',
             'password_in_text' => 'required | sometimes',
             'image' => 'required | sometimes',
             'role_id' => 'required | sometimes',

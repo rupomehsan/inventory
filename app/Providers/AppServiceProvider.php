@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
-        WarehouseProductOut::observe(WarehouseProductOutObserver::class);
+        // WarehouseProductOut::observe(WarehouseProductOutObserver::class);
     }
 }
