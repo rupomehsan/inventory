@@ -11,14 +11,12 @@ if (!function_exists('Migration')) {
         $formated_module = explode('/', $moduleName);
 
         if (count($formated_module) > 1) {
-
-
             $moduleName = implode('/', $formated_module);
-            $moduleName = Str::replace("/", "\\", $moduleName);
+            $moduleName = Str::replace("/", "/", $moduleName);
             $table_name = Str::plural((Str::snake($formated_module[count($formated_module) - 1])));
         } else {
             $table_name = Str::plural((Str::snake($moduleName)));
-            $moduleName = Str::replace("/", "\\", $moduleName);
+            $moduleName = Str::replace("/", "/", $moduleName);
             // dd($moduleName);
         }
 
@@ -35,7 +33,7 @@ if (!function_exists('Migration')) {
         return new class extends Migration
         {
             /**
-             php artisan migrate --path='\App\\Modules\\Management\\{$moduleName}\\Database\\create_{$table_name}_table.php'
+             php artisan migrate --path='/app/Modules/Management/{$moduleName}/Database/create_{$table_name}_table.php'
              * Run the migrations.
              */
             public function up(): void
@@ -148,7 +146,6 @@ if (!function_exists('TableMigration')) {
 
             $moduleName = Str::replace("/", "\\", $moduleName);
             $table_name = Str::plural((Str::snake($formated_module[count($formated_module) - 1])));
-
         } else {
             $table_name = Str::plural((Str::snake($moduleName)));
             $moduleName = Str::replace("/", "\\", $moduleName);

@@ -19,27 +19,25 @@
         <div class="d-flex justify-content-between">
           <div>
             <strong>Bill No: </strong>
-            <span class="underline">123</span>
+            <span class="underline">{{ item.id }}</span>
           </div>
           <div>
             <strong>Challan No: </strong>
-            <span class="underline">123asdfas</span>
+            <span class="underline">{{ item.order_id }}</span>
           </div>
           <div>
             <strong>Date: </strong>
-            <span class="underline">12 / 12 / 25</span>
+            <span class="underline">{{ item.date }}</span>
           </div>
         </div>
         <div class="d-flex justify-content-between mt-3 gap-2">
           <div>
-            <strong>Name: </strong> <span class="underline">Md ehsan khan</span>
+            <strong>Name: </strong>
+            <span class="underline">{{ item.suppliyer?.name }}</span>
           </div>
           <div class="text-start">
             <strong>Address:</strong>
-            <span class="underline"
-              >House # 20, Road # 33, Sector # 07, Uttara, Dhaka-1230,
-              Bangladesh</span
-            >
+            <span class="underline">{{ item.address ?? "N/A" }}</span>
           </div>
         </div>
       </div>
@@ -57,60 +55,28 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Sample Item</td>
-              <td>10</td>
-              <td>500</td>
-              <td>5000</td>
+            <tr v-for="(data, index) in item.purchase_order_products">
+              <td>{{ index + 1 }}</td>
+              <td>{{ data.product_name }}</td>
+              <td>{{ data.quantity }}</td>
+              <td>{{ data.price }}</td>
+              <td>{{ data.subtotal }}</td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Sample Item</td>
-              <td>10</td>
-              <td>500</td>
-              <td>5000</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Sample Item</td>
-              <td>10</td>
-              <td>500</td>
-              <td>5000</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Sample Item</td>
-              <td>10</td>
-              <td>500</td>
-              <td>5000</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Sample Item</td>
-              <td>10</td>
-              <td>500</td>
-              <td>5000</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Sample Item</td>
-              <td>10</td>
-              <td>500</td>
-              <td>5000</td>
-            </tr>
+
             <tr></tr>
             <tr>
               <td colspan="3" class="text-left py-4">
                 <strong>
                   Taka in Words:
-                  <span class="underline">Fifty Thousand</span>
+                  <span class="underline text-capitalize">{{
+                    convert_amount(item.total)
+                  }}</span>
                 </strong>
               </td>
               <td class="text-right">
                 <strong>Total Amount:</strong>
               </td>
-              <td>5000</td>
+              <td>{{ item.total }}</td>
             </tr>
           </tbody>
         </table>
@@ -137,16 +103,42 @@
     </button>
   </div>
 </template>
-
 <script>
+import { mapActions, mapState } from "pinia";
+import { store } from "../store";
+import setup from "../setup";
+import form_fields from "../setup/form_fields";
+
 export default {
+  data: () => ({
+    setup,
+  }),
+  created: async function () {
+    let id = (this.param_id = this.$route.params.id);
+    if (id) {
+      await this.details(id);
+    }
+  },
   methods: {
+    ...mapActions(store, {
+      details: "details",
+    }),
     print() {
       window.print();
     },
+    convert_amount: function (params) {
+      return convert(params);
+    },
+  },
+
+  computed: {
+    ...mapState(store, {
+      item: "item",
+    }),
   },
 };
 </script>
+
 <style>
 body {
   font-family: Arial, sans-serif;

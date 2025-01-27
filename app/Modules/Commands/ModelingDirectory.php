@@ -78,6 +78,7 @@ class ModelingDirectory extends Command
 
         $migrationtable = 'create_' . $table . '_table.php';
 
+
         $actionFiles = [
 
             'GetAllData.php',
@@ -228,14 +229,14 @@ class ModelingDirectory extends Command
             $formated_module = explode('/', $moduleName);
             if (count($formated_module) > 1) {
                 $moduleName = implode('/', $formated_module);
-                $moduleName = Str::replace("/", "\\", $moduleName);
+                $moduleName = Str::replace("/", "/", $moduleName);
                 $table_name = Str::plural((Str::snake($formated_module[count($formated_module) - 1])));
             } else {
                 $table_name = Str::plural((Str::snake($moduleName)));
-                $moduleName = Str::replace("/", "\\", $moduleName);
+                $moduleName = Str::replace("/", "/", $moduleName);
             }
 
-            $migrationPath = "\App\\Modules\\Management\\{$ViewModuleName}\\Database\\create_{$table_name}_table.php";
+            $migrationPath = "/app/Modules/Management/{$ViewModuleName}/Database/create_{$table_name}_table.php";
             Artisan::call('migrate', ['--path' => $migrationPath]);
         }
 
@@ -244,13 +245,13 @@ class ModelingDirectory extends Command
             $formated_module = explode('/', $SeederDirectory);
             if (count($formated_module) > 1) {
                 $SeederDirectory = implode('/', $formated_module);
-                $SeederDirectory = Str::replace("/", "\\", $SeederDirectory);
+                $SeederDirectory = Str::replace("/", "/", $SeederDirectory);
             } else {
-                $SeederDirectory = Str::replace("/", "\\", $SeederDirectory);
+                $SeederDirectory = Str::replace("/", "/", $SeederDirectory);
             }
 
-            $seederPath = "\App\\Modules\\Management\\{$SeederDirectory}\\Seeder\\Seeder";
-            Artisan::call('db:seed', ['--class' => $seederPath]);
+            $seederPath = "/app/Modules/Management/{$SeederDirectory}/Seeder/Seeder";
+            // Artisan::call('db:seed', ['--class' => $seederPath]);
         }
 
 

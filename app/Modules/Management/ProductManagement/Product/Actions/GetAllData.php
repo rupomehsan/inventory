@@ -47,6 +47,9 @@ class GetAllData
                 if (request()->input('product_sub_category_id')) {
                     $data->where('product_sub_category_id', request()->input('product_sub_category_id'));
                 }
+                if (request()->input('suppliyer_id')) {
+                    $data->where('suppliyer_id', request()->input('suppliyer_id'));
+                }
             }
 
             if ($status == 'trased') {

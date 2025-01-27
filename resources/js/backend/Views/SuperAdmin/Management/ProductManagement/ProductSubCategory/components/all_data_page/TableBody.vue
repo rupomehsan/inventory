@@ -1,6 +1,6 @@
 <template>
   <tr
-    v-for="item in data"
+    v-for="(item, dataindex) in data"
     :key="item.id"
     :class="`table_rows table_row_${item.id}`"
   >
@@ -11,8 +11,9 @@
       <select-single :data="item" />
     </td>
     <template v-for="(row_item, index) in setup.table_row_data" :key="index">
-      <td class="text-wrap max-w-120">
-        {{ trim_content(item[row_item]) }}
+      <td v-if="row_item == 'id'">{{ dataindex + 1 }}</td>
+      <td v-else class="text-wrap max-w-120">
+        {{ trim_content(item[row_item], row_item) }}
       </td>
     </template>
   </tr>
@@ -35,8 +36,12 @@ export default {
   },
 
   methods: {
-    trim_content(content) {
+    trim_content(content, row_item = null) {
       if (typeof content == "string") {
+        if (row_item == "created_at" || row_item == "updated_at") {
+          return new Date(content).toLocaleTimeString();
+        }
+
         return content.length > 50 ? content.substring(0, 50) + "..." : content;
       }
       if (typeof content == "object") {

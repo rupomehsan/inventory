@@ -27,6 +27,9 @@ return new class extends Migration
             $table->bigInteger('discount')->nullable()->unsigned();
             $table->bigInteger('total')->nullable()->unsigned();
             $table->bigInteger('total_in_bdt')->nullable();
+            $table->bigInteger('due')->nullable()->unsigned();
+            $table->bigInteger('paid')->nullable()->unsigned();
+            $table->enum('order_status', ['due', 'paid'])->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 150)->nullable();

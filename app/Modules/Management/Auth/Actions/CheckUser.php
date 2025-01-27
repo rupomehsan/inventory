@@ -17,7 +17,6 @@ class CheckUser
                         'slug',
                         'name',
                         'email',
-                        'address',
                         'phone_number',
                         'image',
                         'role_id',
