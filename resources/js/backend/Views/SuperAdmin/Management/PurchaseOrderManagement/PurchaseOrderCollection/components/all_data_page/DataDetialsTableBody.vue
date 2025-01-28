@@ -32,7 +32,7 @@ export default {
     trim_content(content, row_item = null) {
       if (typeof content == "string") {
         if (row_item == "created_at" || row_item == "updated_at") {
-          return new date(content).tolocaletimestring();
+          return new Date(content).toLocaleTimeString();
         }
         return content.length > 50 ? content.substring(0, 50) + "..." : content;
       }

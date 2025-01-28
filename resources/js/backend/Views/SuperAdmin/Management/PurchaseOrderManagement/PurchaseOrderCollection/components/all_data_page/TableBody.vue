@@ -40,23 +40,25 @@ export default {
   methods: {
     trim_content(content, row_item = null) {
       if (typeof content == "string") {
-        if (row_item == "created_at" || row_item == "updated_at") {
-          return new date(content).tolocaletimestring();
+        if (row_item == "created_at") {
+          return new Date(content).toLocaleTimeString();
         }
         return content.length > 50 ? content.substring(0, 50) + "..." : content;
       }
+
       if (content && typeof content === "object") {
         for (const key of Object.keys(content)) {
           if (key === "title" && content.title) {
-            return content.title;
+            return content.title.length > 50
+              ? content.title.substring(0, 50) + "..."
+              : content.title;
           }
           if (key === "name" && content.name) {
-            return content.name;
+            return content.name.substring(0, 20) + "...";
           }
         }
       }
-
-      return content || "";
+      return content;
     },
   },
 };
