@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Management\ProductManagement\Product\Controller;
+
 use App\Modules\Management\ProductManagement\Product\Actions\GetAllData;
 use App\Modules\Management\ProductManagement\Product\Actions\DestroyData;
 use App\Modules\Management\ProductManagement\Product\Actions\GetSingleData;
@@ -13,13 +14,15 @@ use App\Modules\Management\ProductManagement\Product\Actions\ImportData;
 use App\Modules\Management\ProductManagement\Product\Validations\BulkActionsValidation;
 use App\Modules\Management\ProductManagement\Product\Validations\DataStoreValidation;
 use App\Modules\Management\ProductManagement\Product\Actions\BulkActions;
+use App\Modules\Management\ProductManagement\Product\Actions\GetAllProductByWarehouseId;
 use App\Http\Controllers\Controller as ControllersController;
 
 
 class Controller extends ControllersController
 {
 
-    public function index( ){
+    public function index()
+    {
 
         $data = GetAllData::execute();
         return $data;
@@ -42,7 +45,7 @@ class Controller extends ControllersController
         $data = UpdateData::execute($request, $slug);
         return $data;
     }
-         public function updateStatus()
+    public function updateStatus()
     {
         $data = UpdateStatus::execute();
         return $data;
@@ -73,5 +76,9 @@ class Controller extends ControllersController
         $data = BulkActions::execute($request);
         return $data;
     }
-
+    public function GetAllProductByWarehouseId()
+    {
+        $data = GetAllProductByWarehouseId::execute();
+        return $data;
+    }
 }

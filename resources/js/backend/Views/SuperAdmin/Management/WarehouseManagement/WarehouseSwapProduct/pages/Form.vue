@@ -31,7 +31,9 @@
         </div>
         <div class="card-body card_body_fixed_height">
           <div class="w-50 mx-auto" v-if="quantity_message">
-            <p class="alert alert-danger text-center py-3">{{ quantity_message }}</p>
+            <p class="alert alert-danger text-center py-3">
+              {{ quantity_message }}
+            </p>
           </div>
           <div class="row">
             <template
@@ -87,7 +89,6 @@ export default {
     }
 
     await this.get_all_warehouses();
-    await this.get_all_products();
   },
   methods: {
     ...mapActions(store, {
@@ -154,8 +155,10 @@ export default {
         });
       }
     },
-    get_all_products: async function () {
-      let response = await axios.get("products?get_all=1");
+    get_all_products_by_warehouse_id: async function (warehouse_id) {
+      let response = await axios.get(
+        `get-all-product-by-warehouse-id?warehouse_id=${warehouse_id}`
+      );
       if (response.data.status == "success") {
         response = response.data?.data || [];
         this.form_fields[2].data_list = [];
@@ -172,6 +175,7 @@ export default {
     },
     get_product_available_quantity: async function () {
       if (event.target.name == "from_warehouse_id") {
+        this.get_all_products_by_warehouse_id(event.target.value);
         this.ware_house_id = event.target.value;
       }
       if (event.target.name == "product_id") {
