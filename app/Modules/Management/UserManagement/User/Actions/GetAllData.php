@@ -22,6 +22,10 @@ class GetAllData
 
             $data = self::$model::query();
 
+            if (request()->has('employee_list') && request()->input('employee_list')) {
+                $condition['role_id'] = 2;
+            }
+
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {

@@ -20,7 +20,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = ['account_category'];
+            $with = ['account_category', 'user:id,name'];
             $condition = [];
 
             $data = self::$model::query();
@@ -60,6 +60,10 @@ class GetAllData
                     $data->whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59']);
                 } elseif ($end_date == $start_date) {
                     $data->whereDate('created_at', $start_date);
+                }
+
+                if (request()->has('employee_id') && request()->input('employee_id')) {
+                    $condition['creator'] = request()->input('employee_id');
                 }
             }
 
