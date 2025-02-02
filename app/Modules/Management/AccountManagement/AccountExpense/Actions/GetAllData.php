@@ -20,7 +20,7 @@ class GetAllData
             $fields = request()->input('fields') ?? '*';
             $start_date = request()->input('start_date');
             $end_date = request()->input('end_date');
-            $with = ['account_category', 'user:id,name'];
+            $with = ['account_category', 'user:id,name', 'customer:id,name'];
             $condition = [];
 
             $data = self::$model::query();
@@ -36,7 +36,9 @@ class GetAllData
                 $condition['is_seen'] = request()->input('is_seen');
             }
 
-
+            if (request()->has('only_employee_data') && request()->input('only_employee_data')) {
+                $condition['creator'] = auth()->id();
+            }
 
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');

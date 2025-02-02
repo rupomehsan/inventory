@@ -1,6 +1,6 @@
 <template>
   <tr
-    v-for="(item, dataindex) in data"
+    v-for="item in data"
     :key="item.id"
     :class="`table_rows table_row_${item.id}`"
   >
@@ -10,14 +10,25 @@
     <td>
       <select-single :data="item" />
     </td>
-    <template v-for="(row_item, index) in setup.table_row_data" :key="index">
-      <td v-if="row_item == 'id'">
-        {{ dataindex + 1 }}
-      </td>
-      <td v-else class="text-wrap max-w-120">
-        {{ trim_content(item[row_item], row_item) }}
-      </td>
-    </template>
+
+    <td class="text-wrap max-w-120">
+      {{ item.id }}
+    </td>
+    <td class="text-wrap max-w-120">
+      {{ item.account_category?.title ?? "N/A" }}
+    </td>
+    <td class="text-wrap max-w-120">
+      {{ item.title ?? "N/A" }}
+    </td>
+    <td class="text-wrap max-w-120">
+      {{ item.amount ?? "N/A" }}
+    </td>
+    <td class="text-wrap max-w-120">
+      {{ item.is_approved == 1 ? "Approved" : "Pending" }}
+    </td>
+    <td class="text-wrap max-w-120">
+      {{ new Date(item.created_at).toLocaleString() }}
+    </td>
   </tr>
 </template>
 
@@ -38,14 +49,15 @@ export default {
   },
 
   methods: {
-    trim_content(content, row_item = null) {
-      if (typeof content == "string") {
-        if (row_item == "created_at" || row_item == "updated_at") {
-          return new Date(content).toLocaleTimeString();
+    updateStatus: async function (slug) {
+      let is_approved = event.target.checked;
+      let response = await axios.post(
+        "account-expenses/update-status?is_approved_status=1",
+        {
+          slug: slug,
+          is_approved: is_approved,
         }
-        return content.length > 50 ? content.substring(0, 50) + "..." : content;
-      }
-      return content;
+      );
     },
   },
 };

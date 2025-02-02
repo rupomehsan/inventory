@@ -31,9 +31,23 @@ export default {
   methods: {
     trim_content(content, row_item = null) {
       if (typeof content == "string") {
-        return content;
+        if (row_item == "created_at" || row_item == "updated_at") {
+          return new Date(content).toLocaleTimeString();
+        }
+        return content.length > 50 ? content.substring(0, 50) + "..." : content;
       }
-      return content;
+      if (content && typeof content === "object") {
+        for (const key of Object.keys(content)) {
+          if (key === "title" && content.title) {
+            return content.title;
+          }
+          if (key === "name" && content.name) {
+            return content.name;
+          }
+        }
+      }
+
+      return content || "";
     },
   },
 };

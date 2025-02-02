@@ -48,6 +48,9 @@ class DataStoreValidation extends FormRequest
             'description' => 'required | sometimes',
             'is_approved' => 'required | sometimes',
             'user_type' => 'required | sometimes',
+            'customer_id' => 'required | sometimes',
+            'date' => 'required | sometimes',
+            'document' => 'sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

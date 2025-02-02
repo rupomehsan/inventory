@@ -1,9 +1,10 @@
 export default [
 	{
 		name: "account_category_id",
-		label: "Enter your account category id",
-		type: "number",
+		label: "Select account category ",
+		type: "select",
 		value: "",
+        data_list: [],
 	},
 
 	{
@@ -23,7 +24,8 @@ export default [
 	{
 		name: "description",
 		label: "Enter your description",
-		type: "text",
+		type: "textarea",
 		value: "",
+        row_col_class: "col-md-12",
 	},
 ];

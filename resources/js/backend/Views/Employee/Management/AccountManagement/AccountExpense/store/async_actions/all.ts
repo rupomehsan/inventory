@@ -47,7 +47,7 @@ let execute = async () => {
   // console.log(store, qparams);
 
   let response: anyObject = {};
-  let url = `${api_host}/${api_version}/${api_end_point}`;
+  let url = `${api_host}/${api_version}/${api_end_point}?only_employee_data=1`;
   let full_url: URL = new URL(url);
   let fetch_only_latest: boolean = true;
 

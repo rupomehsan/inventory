@@ -166,9 +166,7 @@
               </a>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="dropdown-item">
-              <i class="zmdi zmdi-comments mr-3"></i>Inbox
-            </li>
+
             <li class="dropdown-divider"></li>
 
             <li class="dropdown-divider"></li>

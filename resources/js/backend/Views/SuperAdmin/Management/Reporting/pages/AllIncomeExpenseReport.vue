@@ -4,12 +4,14 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            <div class="table-responsive table_responsive card_body_fixed_height">
+            <div
+              class="table-responsive table_responsive card_body_fixed_height"
+            >
               <table class="table table-bordered text-white">
                 <thead>
                   <tr>
                     <th colspan="4" class="text-center">
-                      <h4>আয় ব্যয় হিসাব</h4>
+                      <h4>Income Expense Report</h4>
                     </th>
                   </tr>
                   <!-- <tr>
@@ -18,23 +20,31 @@
                     <td class="text-end">সাল</td>
                   </tr> -->
                   <tr>
-                    <td class="w-25">তারিখ</td>
+                    <td class="w-25">date</td>
                     <td colspan="2" class="w-50">
-                      <input v-model="start_date" type="date" class="income_expense_date_field" />
+                      <input
+                        v-model="start_date"
+                        type="date"
+                        class="income_expense_date_field"
+                      />
                       To
-                      <input v-model="end_date" type="date" class="income_expense_date_field" />
+                      <input
+                        v-model="end_date"
+                        type="date"
+                        class="income_expense_date_field"
+                      />
                     </td>
                     <td class="w-25">{{ year }}</td>
                   </tr>
                   <tr>
-                    <th class="w-50" colspan="2">আয়</th>
-                    <th class="w-50" colspan="2">ব্যয়</th>
+                    <th class="w-50" colspan="2">Income</th>
+                    <th class="w-50" colspan="2">Expense</th>
                   </tr>
                   <tr class="row_sticky">
-                    <th>বিবরণ</th>
-                    <th>পরিমান</th>
-                    <th>বিবরণ</th>
-                    <th>পরিমান</th>
+                    <th>description</th>
+                    <th>amount</th>
+                    <th>description</th>
+                    <th>amount</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,15 +57,19 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td>মোট আয় :</td>
-                    <td class="fw-bold"> {{ income_expense_data.totalIncome }}</td>
-                    <td class="fw-bold">মোট ব্যয় : </td>
+                    <td>total income :</td>
+                    <td class="fw-bold">
+                      {{ income_expense_data.totalIncome }}
+                    </td>
+                    <td class="fw-bold">total expense :</td>
                     <td>{{ income_expense_data.totalExpense }}</td>
                   </tr>
-                 
+
                   <tr>
                     <td></td>
-                    <td colspan="2" class="fw-bold">উদ্ধৃত্ত : {{ income_expense_data.surplus }}</td>
+                    <td colspan="2" class="fw-bold">
+                      total surplus : {{ income_expense_data.surplus }}
+                    </td>
                     <td></td>
                   </tr>
                 </tfoot>
@@ -83,7 +97,9 @@ export default {
   },
   methods: {
     get_all_income_expense_report: async function () {
-      let response = await axios.get(`get-all-income-expense-report?start_date=${this.start_date}&end_date=${this.end_date}`);
+      let response = await axios.get(
+        `get-all-income-expense-report?start_date=${this.start_date}&end_date=${this.end_date}`
+      );
 
       if (response.data.status == "success") {
         this.income_expense_data = response.data.data;
@@ -113,5 +129,9 @@ export default {
 }
 .text-end {
   text-align: end !important;
+}
+.card_body_fixed_height {
+  height: calc(100vh) !important;
+  overflow-y: auto !important;
 }
 </style>

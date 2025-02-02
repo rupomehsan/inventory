@@ -22,6 +22,10 @@ class GetAllData
 
             $data = self::$model::query();
 
+            if (request()->has('only_employee_data') && request()->input('only_employee_data')) {
+                $condition['creator'] = auth()->id();
+            }
+
             if (request()->has('search') && request()->input('search')) {
                 $searchKey = request()->input('search');
                 $data = $data->where(function ($q) use ($searchKey) {

@@ -24,6 +24,7 @@ class Model extends EloquentModel
             if (auth()->check()) {
                 $data->creator = auth()->user()->id;
             }
+
             $data->save();
         });
     }
@@ -49,5 +50,10 @@ class Model extends EloquentModel
     public function user()
     {
         return $this->belongsTo('App\Modules\Management\UserManagement\User\Models\Model', 'creator');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Modules\Management\CustomerManagement\Customer\Models\Model', 'customer_id');
     }
 }

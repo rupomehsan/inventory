@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     php artisan migrate --path='\App\Modules\Management\AccountManagement\AccountExpense\Database\create_account_expenses_table.php'
+     php artisan migrate --path='/app/Modules/Management/AccountManagement/AccountExpense/Database/create_account_expenses_table.php'
      * Run the migrations.
      */
     public function up(): void
@@ -21,7 +21,9 @@ return new class extends Migration
             $table->tinyInteger('is_approved')->default(0);
             $table->enum('user_type', ['admin', 'employee'])->nullable();
             $table->tinyInteger('is_seen')->default(0);
-
+            $table->bigInteger('customer_id')->nullable();
+            $table->date('date')->nullable();
+            $table->string('document')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 150)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');

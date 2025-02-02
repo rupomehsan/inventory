@@ -18,6 +18,11 @@ class UpdateData
             }
 
             $requestData = $request->validated();
+            if ($request->hasFile('document')) {
+                $image = $request->file('document');
+                $requestData['document'] = uploader($image, 'uploads/document');
+            }
+
             $data->update($requestData);
             return messageResponse('Item updated successfully', $data, 201);
         } catch (\Exception $e) {
