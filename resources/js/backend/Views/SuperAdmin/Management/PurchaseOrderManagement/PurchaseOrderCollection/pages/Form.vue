@@ -116,7 +116,7 @@
                     <th>Amount</th>
                   </tr>
                   <tr
-                    v-for="item in order_details.sales_collection_histories"
+                    v-for="item in order_details.purchase_order_providing_history"
                     :key="item"
                   >
                     <td>

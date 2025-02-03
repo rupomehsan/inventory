@@ -291,6 +291,7 @@
                     <td>
                       <input
                         class="form-control form-control-square"
+                        required
                         type="number"
                         v-model="formData.paid"
                       />
@@ -391,6 +392,8 @@ export default {
         this.formData.currency_exchange_rate = this.item.currency_exchange_rate;
         this.formData.expected_time_of_delivery =
           this.item.expected_time_of_delivery;
+        this.formData.paid = this.item.paid;
+        this.formData.due = this.item.due;
 
         this.update_total_price.subtotal = this.item.subtotal;
         this.update_total_price.discount = this.item.discount;

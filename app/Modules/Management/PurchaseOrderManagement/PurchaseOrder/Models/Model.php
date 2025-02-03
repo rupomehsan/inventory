@@ -60,7 +60,13 @@ class Model extends EloquentModel
         return $this->hasMany(self::$PurchaseOrderLogModel, 'purchase_order_id');
     }
 
-    public function suppliyer(){
+    public function suppliyer()
+    {
         return $this->belongsTo(\App\Modules\Management\SuppliyerManagement\Suppliyer\Models\Model::class, 'suppliyer_id');
+    }
+
+    public function purchase_order_providing_history()
+    {
+        return $this->hasMany(\App\Modules\Management\PurchaseOrderManagement\PurchaseOrderCollection\Models\Model::class, 'purchase_order_id');
     }
 }

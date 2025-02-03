@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('password_in_text', 50)->nullable();
             $table->string('join_date')->nullable();
             $table->bigInteger('salery')->nullable();
-            $table->string('can_login')->nullable();
+            $table->string('can_login')->default(1);
             $table->string('nid')->nullable();
             $table->text('comment')->nullable();
             $table->bigInteger('creator')->unsigned()->nullable();

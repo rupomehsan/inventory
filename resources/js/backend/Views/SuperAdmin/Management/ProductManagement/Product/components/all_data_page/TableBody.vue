@@ -13,7 +13,12 @@
     <template v-for="(row_item, index) in setup.table_row_data" :key="index">
       <td v-if="row_item == 'id'">{{ dataindex + 1 }}</td>
       <td v-else class="text-wrap max-w-120">
-        {{ trim_content(item[row_item], row_item) }}
+        <template v-if="row_item == 'image' && item[row_item]">
+          <img width="70" :src="item[row_item]" alt="" />
+        </template>
+        <template v-else>
+          {{ trim_content(item[row_item], row_item) }}
+        </template>
       </td>
     </template>
   </tr>
@@ -42,7 +47,7 @@ export default {
           return new Date(content).toLocaleTimeString();
         }
 
-        return content.length > 50 ? content.substring(0, 50) + "..." : content;
+        return content.length > 20 ? content.substring(0, 20) + "..." : content;
       }
       if (content && typeof content === "object") {
         for (const key of Object.keys(content)) {

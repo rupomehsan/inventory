@@ -94,7 +94,7 @@
           },
           {
             route_name: `AllPurchaseOrderCollection`,
-            title: `Purchase Order Collection`,
+            title: `Purchase Order Providing`,
             icon: `zmdi zmdi-dot-circle-alt`,
           },
         ]"
