@@ -28,6 +28,7 @@ return new class extends Migration
             $table->bigInteger('total')->nullable()->unsigned();
             $table->bigInteger('total_in_bdt')->nullable();
             $table->json('purchase_order_products')->nullable();
+            $table->string('paid', 150)->nullable();
 
             $table->bigInteger('creator')->unsigned()->nullable();
             $table->string('slug', 150)->nullable();

@@ -53,6 +53,8 @@ class DataStoreValidation extends FormRequest
             'discount' => 'required | sometimes',
             'total' => 'required | sometimes',
             'total_in_bdt' => 'required | sometimes',
+            'paid' => ' sometimes',
+            'due' => ' sometimes',
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
         ];
     }

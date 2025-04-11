@@ -26,7 +26,7 @@
                     v-model="formData.title"
                   />
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
             <div class="col-md-6">
@@ -41,7 +41,7 @@
                     v-model="formData.reference"
                   />
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
             <div class="col-md-6">
@@ -64,7 +64,7 @@
                     </option>
                   </select>
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
             <div class="col-md-6">
@@ -79,7 +79,7 @@
                     v-model="formData.date"
                   />
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
             <div class="col-md-6">
@@ -94,9 +94,10 @@
                   >
                     <option value="1">Chinese Yuan</option>
                     <option value="2">BDT</option>
+                    <option value="3">USD</option>
                   </select>
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
             <div class="col-md-6">
@@ -111,7 +112,7 @@
                     v-model="formData.currency_exchange_rate"
                   />
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
             <div class="col-md-6">
@@ -126,7 +127,7 @@
                     v-model="formData.expected_time_of_delivery"
                   />
                 </div>
-                <!--v-if--><!--v-if--><!--v-if-->
+           
               </div>
             </div>
           </div>
@@ -159,7 +160,7 @@
                   <th>Product Name</th>
                   <th>Quantity</th>
                   <th>Price</th>
-                  <th>Currency</th>
+                  <!-- <th>Currency</th> -->
                   <th>SubTotal In BDT</th>
                   <th>SubTotal</th>
                   <th>Actions</th>
@@ -194,15 +195,16 @@
                       v-model="item.price"
                     />
                   </td>
-                  <td>
+                  <!-- <td>
                     <select
                       v-model="item.currency_id"
                       class="form-control form-control-square"
                     >
                       <option value="1">Chinese Yuan</option>
                       <option value="2">BDT</option>
+                      <option value="3">USD</option>
                     </select>
-                  </td>
+                  </td> -->
                   <td>
                     <input
                       class="form-control form-control-square"
@@ -286,11 +288,12 @@
                       />
                     </td>
                   </tr>
-                  <tr v-if="!param_id">
+                  <tr >
                     <td colspan="2">Paid</td>
                     <td>
                       <input
                         class="form-control form-control-square"
+                        :readonly="param_id ? true : false"
                         required
                         type="number"
                         v-model="formData.paid"
@@ -384,6 +387,7 @@ export default {
       this.param_id = id;
       await this.details(id);
       if (this.item) {
+
         this.formData.title = this.item.title;
         this.formData.reference = this.item.reference;
         this.formData.suppliyer_id = this.item.suppliyer_id;
@@ -402,6 +406,7 @@ export default {
         this.update_total_price.total_in_bdt = this.item.total_in_bdt;
 
         this.product_items = this.item.purchase_order_products;
+        
       }
     },
 
@@ -506,10 +511,14 @@ export default {
       this.update_total_price.total =
         Number(subtotal) + Number(other_cost) - Number(discount);
     },
+    calculateDue() {
+      this.formData.due = this.formData.paid - this.update_total_price.total;
+    }
   },
 
   watch: {
     product_items: {
+
       handler(newItems) {
         // Calculate the total subtotal for all items
         const itemTotal = newItems.reduce((total, item) => {
@@ -524,6 +533,8 @@ export default {
         this.update_total_price.subtotal = itemTotal;
         this.update_total_price.total_in_bdt =
           Number(itemTotal) * Number(this.formData.currency_exchange_rate);
+
+          this.calculateDue();
       },
       deep: true,
     },
@@ -533,6 +544,8 @@ export default {
         const { subtotal, discount, other_cost } = newValue;
         this.update_total_price.total =
           Number(subtotal) + Number(other_cost) - Number(discount);
+
+          this.calculateDue();
       },
       deep: true,
     },
@@ -547,10 +560,14 @@ export default {
 
     "formData.paid": {
       handler: function (newValue) {
-        console.log(this.formData);
-
         this.formData.due =
           Number(this.update_total_price.total) - Number(newValue);
+      },
+      deep: true,
+    },
+    "update_total_price.other_cost": {
+      handler: function () {
+        this.calculateDue();
       },
       deep: true,
     },

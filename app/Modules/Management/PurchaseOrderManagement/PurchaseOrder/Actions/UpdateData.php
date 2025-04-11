@@ -32,6 +32,8 @@ class UpdateData
             $requestData['other_cost'] = $request->update_total_price['other_cost'] ?? 0;
             $requestData['total'] = $request->update_total_price['total'] ?? 0;
             $requestData['total_in_bdt'] = $request->update_total_price['total_in_bdt'] ?? 0;
+            $requestData['due'] =  abs($requestData['due']);
+
 
             // Update the main purchase order data
             if ($data->update($requestData)) {
@@ -66,6 +68,8 @@ class UpdateData
                 // Log the update action
                 $requestData['purchase_order_id'] = $data->id;
                 $requestData['purchase_order_products'] = $request->product_items;
+                unset($requestData['due']);
+                unset($requestData['paid']);
                 self::$PurchaseOrderLogModel::create($requestData);
             }
 
