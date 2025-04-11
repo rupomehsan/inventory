@@ -10,6 +10,7 @@ use App\Modules\Management\WarehouseManagement\WareHouse\Actions\UpdateStatus;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\SoftDelete;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\RestoreData;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\ImportData;
+use App\Modules\Management\WarehouseManagement\WareHouse\Actions\GetWarehouseWiseProductLists;
 use App\Modules\Management\WarehouseManagement\WareHouse\Actions\GetProductRelatedWarehouseByOrderIdAndProductId;
 use App\Modules\Management\WarehouseManagement\WareHouse\Validations\BulkActionsValidation;
 use App\Modules\Management\WarehouseManagement\WareHouse\Validations\DataStoreValidation;
@@ -77,6 +78,11 @@ class Controller extends ControllersController
     public function GetProductRelatedWarehouseByOrderIdAndProductId()
     {
         $data = GetProductRelatedWarehouseByOrderIdAndProductId::execute();
+        return $data;
+    }
+    public function GetWarehouseWiseProductLists($slug)
+    {
+        $data = GetWarehouseWiseProductLists::execute($slug);
         return $data;
     }
 

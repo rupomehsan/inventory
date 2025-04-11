@@ -8,6 +8,7 @@ export const initialState = {
     /* data store */
     all: {} as anyObject,
     item: {} as anyObject,
+    product_lists: {} as anyObject,
     url: '',
 
     /*_______________*/

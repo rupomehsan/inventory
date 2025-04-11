@@ -40,4 +40,9 @@ class Model extends EloquentModel
     {
         return $q->onlyTrashed();
     }
+
+    public function warehouse_stock_product()
+    {
+        return $this->hasOne('App\Modules\Management\WarehouseManagement\WarehouseProductStock\Models\Model', 'warehouse_id', 'id');
+    }
 }
